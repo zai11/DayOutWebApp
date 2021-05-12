@@ -1,1 +1,1 @@
-web: gunicorn -w 2 'day-out-web-app:create_app()'
+web: gunicorn -w 2 'website:create_app()'
