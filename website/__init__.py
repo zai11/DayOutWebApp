@@ -12,6 +12,7 @@ def create_app():
   
     app=Flask(__name__)  # this is the name of the module/package that is calling this app
     app.debug=True
+    from . import models
     app.secret_key='utroutoru'
     #set the app configuration data 
     app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///sitedata.sqlite'
