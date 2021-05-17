@@ -31,7 +31,7 @@ class Event(db.Model):
     end_date = db.Column(db.DateTime, default=datetime.now())
     timezone = db.Column(db.String(100))
     ticket_capacity = db.Column(db.Integer)
-    price = db.Column(db.Decimal)
+    price = db.Column(db.DECIMAL)
 
 
 	# relation to call event.comments and comment.event
