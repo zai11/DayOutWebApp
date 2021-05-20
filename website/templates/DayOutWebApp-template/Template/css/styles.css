@@ -1,0 +1,137 @@
+  .row {
+      margin-bottom: 40px;
+  }
+  
+  .jumbotron {
+    background: url('../img/header-bg.jpg') center / cover no-repeat;
+    background-size: cover;
+    padding-bottom: 100px;
+    padding-top: 10px;
+  }
+  
+  .navbar {
+      margin-bottom: 100px;
+  }
+
+  .container-fluid {
+      padding: 0px;
+  }
+
+  .list-unstyled {
+    text-decoration: none;
+  }
+
+  .eventimage {
+    margin-top: -2em;
+    margin-bottom: -20em;
+  }
+
+  .eventimage img {
+    max-width: 80%;
+  }
+
+  .form-group {
+    margin-bottom: 10em;
+}
+
+  .breadcrumb {
+    margin-top: 50px;
+    padding-left: 70px;
+  }
+  
+  .footer {
+    background-color: #ffcf73;
+    text-decoration: none;
+    padding-bottom: 20px;
+  }
+
+  .footer a {
+    text-decoration: none;
+  }
+
+  .row .settings {
+    margin-top: 2em;
+  }
+
+  .card-text {
+    font-size: 12px;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.card-text {
+  font-size: 12px; !important
+}
+
+.map-container-5{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+  }
+  .map-container-5 iframe{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+  }
+
+/* custom.scss */    
+
+/* import the necessary Bootstrap files */
+@import "bootstrap";
+
+/* ------- customize primary buttons -------- */   
+$mynewcolor:#77cccc;
+
+.btn-primary {
+    @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+}
+
+.btn-outline-primary {
+    @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #ffb400;
+    border-color: #ffb400;
+    color: #414141;
+}
+
+.btn-primary:hover {
+    background-color: #ffa800;
+    border-color: #ffa800;
+    color: #ffffff;
+}
+
+.btn-check[checked] {
+  background-color: #ffa800;
+  border-color: #ffa800;
+  color: #ffffff;
+}
+
+.btn.btn-primary[disabled] {
+  background-color: #ffc24b;
+  border-color: #ffc24b;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #414141;
+  background-color: #ffb400;
+}
+
+.row.form {
+  margin-bottom: 20px;
+}
+
+.row.header {
+  margin-bottom: 0px;
+}
