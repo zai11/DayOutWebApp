@@ -44,7 +44,7 @@
                   </ul>
                   <div class="d-grid gap-2 d-md-block">
                   <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
-                  <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm">Sign in</a>
+                  <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm">Login</a>
                   </div>
                 </div>
               </div>
@@ -83,13 +83,14 @@
          </div>
          <div class="col-6 col-md">
            <h5>
-             Host Events
+             Categories
            </h5>
            <ul class="list-unstyled text-small">
-             <li class="text-muted">Music Festival</li>
-             <li class="text-muted">Jazz Events</li>
-             <li class="text-muted">Silent Disco</li>
-             <li class="text-muted">Dance Party</li>
+            <a href="/"><li class="text-muted">Jazz</li></a>
+            <a href="/#pills-country-tab"><li class="text-muted">Country</li></a>
+             <li class="text-muted">Classical</li>
+             <li class="text-muted">Hip-Hop</li>
+             <li class="text-muted">Electronic</li>
            </ul>
          </div>
          <div class="col-6 col-md">

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>Dayout - Register</title>{% endblock %}
+{% block title %}<title>Dayout - {{heading}}</title>{% endblock %}
 
 {% block header %}
 <div class="container">
@@ -17,10 +17,6 @@
  
  {% import "bootstrap/wtf.html" as wtf %}
  {% block body %}
-
-<div class="page-header">
-    <h4>{{heading}}</h4>
-</div>
 
 
 {% block content %} 
@@ -41,16 +37,44 @@
 
 
 <!-- Form rendering is simple and easy if using bootstrap -->
-<div class="col-md-6">
-    {{wtf.quick_form(form)}}
+<div class="container">
+    <div class="row">
+    <div class="col-sm-4">
+        {% if heading|lower =='register' %}
+        <!-- {{wtf.quick_form(form)}} -->
+        <form action="" method="post" class="form" role="form">
+            {{ form.csrf_token() }}
+        {{ wtf.form_field(form.user_name, class='form-control', placeholder='Choose a username') }}
+        {{ wtf.form_field(form.email_id, class='form-control', placeholder='john@smith.com') }}
+        {{ wtf.form_field(form.password, class='form-control', placeholder='Choose a password') }}
+        {{ wtf.form_field(form.confirm, class='form-control', placeholder='Confirm password') }}
+        <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        {% endif %}
+        {% if heading|lower =='login' %}
+        <!-- {{wtf.quick_form(form)}} -->
+        <form action="" method="post" class="form" role="form">
+        {{ form.csrf_token() }}
+        {{ wtf.form_field(form.user_name, class='form-control', placeholder='Enter your username') }}
+        {{ wtf.form_field(form.password, class='form-control', placeholder='Enter your password') }}
+        <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        {% endif %}
+        <!-- When you have login form, then do show the user a link to register -->
+        {% if heading|lower =='login' %}
+
+        <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+        {% endif %}
+    </div>
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+    </div>
+
+</div>
 </div>
 
-<!-- When you have login form, then do show the user a link to register -->
-{% if heading|lower =='login' %}
-<div class="col-md-4">
-    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
-</div>
-{% endif %}
+
 
 {% endblock %}
 {% endblock %}
