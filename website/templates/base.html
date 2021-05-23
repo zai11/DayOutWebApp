@@ -43,8 +43,20 @@
                     </li>
                   </ul>
                   <div class="d-grid gap-2 d-md-block">
+                  <!-- {% if current_user.is_authenticated %} -->
+                  <!--<a class="btn btn-primary btn-sm" href='#'>Neil{{ current_user.name }} </a> -->
+                  
+                  <!-- <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Log Out</a> -->
+                  <!-- {% else %} -->
+                  <a href="{{ url_for('auth.register') }}" class="btn btn-outline-light btn-sm" disabled><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg> Welcome, Neil</a>
+                  <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Logout</a>
                   <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
                   <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm">Login</a>
+                  
+                  <!-- {% endif %}  -->
                   </div>
                 </div>
               </div>
@@ -65,7 +77,8 @@
          <div class="col-12 col-md">
            <a href="/"><img class="mb-2" src="{{ url_for('static',filename='img/logo-black.png') }}" alt="" width="121" height="22"></a>
            <small class="d-block mb-3 text-muted">
-             &copy; 2021
+             Designed and built by Alex Myers, Joel Kerr, Zaichic Turner & Neil Woodwards.
+             <br>&copy; 2021
            </small>
          </div>
          <div class="col-6 col-md">
@@ -87,7 +100,7 @@
            </h5>
            <ul class="list-unstyled text-small">
             <a href="/"><li class="text-muted">Jazz</li></a>
-            <a href="/#pills-country-tab"><li class="text-muted">Country</li></a>
+            <a href="#pills-country"><li class="text-muted">Country</li></a>
              <li class="text-muted">Classical</li>
              <li class="text-muted">Hip-Hop</li>
              <li class="text-muted">Electronic</li>
