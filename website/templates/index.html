@@ -1,353 +1,219 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/styles.css">
+{% block title %}<title>HOME PAGE</title>{% endblock %}
 
-  <!-- Bootstrap Javascript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-  <!-- Title of the webpage -->
-  <title>Dayout | Grow your music event</title>
-</head>
+{% block header %}
+<div class="container">
+  <h1 class="display-4 text-white">Grow your music event</h1>
+  <p class="lead text-white">Make it something that everyone is talking about</p>
+  <a href="create.html" class="btn btn-primary btn-lg">Create event</a>
+</div>
+   </div>
+ </div>
+</div>
+</header>
+{% endblock %}
 
-<body>
-  <header></header>
-  <main>
-    <div class="container-fluid">
-      <!-- Section 1 -->
-      <div class="row section1">
-        <div class="col-xs-12"></div>
-        <div class="header col-xs-12 text-center">
-          <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-              <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="" width="121" height="22"></a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                      <li class="nav-item">
-                        <div class="container-fluid">
-                          <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-primary" type="submit" disabled>Search</button>
-                          </form>
-                        </div>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="create.html">Create event</a>
-                      </li>
-                      <li class="nav-item">
-                      </li>
-                      <li class="nav-item">
-                      </li>
-                    </ul>
-                    <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
-                    <a href="history.html" class="btn btn-outline-light btn-sm">Sign in</a>
-                    </div>
-                  </div>
-                </div>
-              </nav>
-            </div>
 
-            <div class="container">
-              <h1 class="display-4 text-white">Grow your music event</h1>
-              <p class="lead text-white">Make it something that everyone is talking about</p>
-              <a href="create.html" class="btn btn-primary btn-lg">Create event</a>
-            </div>
+{% block content %} 
+<div class="container">
+<!------------------------------ CATEGORIES ------------------------------------------>
+<div class="row categories">
+  <div class="col-xs-12">
+    <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+      <li class="nav-item pill1" role="presentation">
+        <button class="nav-link active" id="pills-jazz-tab" data-bs-toggle="pill" data-bs-target="#pills-jazz" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Jazz</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-country-tab" data-bs-toggle="pill" data-bs-target="#pills-country" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Country</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-classical-tab" data-bs-toggle="pill" data-bs-target="#pills-classical" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Classical</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-hiphop-tab" data-bs-toggle="pill" data-bs-target="#pills-hiphop" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Hip-Hop</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-electronic-tab" data-bs-toggle="pill" data-bs-target="#pills-electronic" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Electronic</button>
+      </li>
+    </ul>
+  </div>
+</div>
+<!------------------------------ CARDS ------------------------------------------>
+<div class="tab-content" id="pills-tabContent">
+  <!------------------------------ CATEGORY JAZZ ------------------------------------------>  
+  <div class="tab-pane fade show active" id="pills-jazz" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
+      <!------------------------------ CARD ITEM ------------------------------------------>
+      <div class="col">
+        <div class="card shadow-sm" >
+          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Jazzy Jammin' Times</h5>
+            <p class="card-text">
+             Some quick example text to build on the card title and make up the bulk of the
+              card's content.
+            </p>
           </div>
-        </div>
-      </div>
-      <div class="container">
-        <!-- Section 2 -->
-        <div class="row city">
-          <div class="col-md-3">
-            <p class="lead">See what's coming up in your area:</p>
-          </div>
-          <div class="col-md-4">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-              <option selected>Choose your city</option>
-              <option value="1">Brisbane</option>
-              <option value="2">Sydney</option>
-              <option value="3">Melbourne</option>
-              <option value="4">Perth</option>
-              <option value="5">Darwin</option>
-              <option value="6">Hobart</option>
-              <option value="7">Adelaide</option>
-              <option value="8">Canberra</option>
-            </select>
-          </div>
-          <div class="col-md-5"></div>
-      </div>
-      <div class="row categories">
-        <div class="col-xs-12">
-          
-          <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-            <li class="nav-item pill1" role="presentation">
-              <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link disabled" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Today</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link disabled" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Upcoming</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Jazz</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link disabled" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Country</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link disabled" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Classical</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link disabled" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Hip-Hop</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link disabled" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Electronic</button>
-              </li>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
+            <li class="list-group-item">Press Club</li>
+            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
           </ul>
-
+          <div class="card-body">
+            <a href="event.html" class="btn btn-primary btn-sm">View details</a>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+          </div>
         </div>
+      </div>
+      <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
-    
-
-   
-    <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Jazzy Jammin' Times</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">Press Club</li>
-                    <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/hiphop.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Hippity Hip-Hop</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">Elements Collective</li>
-                    <li class="list-group-item">17 McLachlan St, Fortitude Valley</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/silentdisco.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Keep Quiet Disco</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">King George Square</li>
-                    <li class="list-group-item">87C Roma St, Brisbane City</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/country.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Currumbin Country Classic</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">Soundlounge</li>
-                    <li class="list-group-item">165 Duringan St, Currumbin</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
+  </div>
+  <!------------------------------ CATEGORY COUNTRY ------------------------------------------>  
+  <div class="tab-pane fade" id="pills-country" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
+      <!------------------------------ CARD ITEM ------------------------------------------>
+      <div class="col">
+        <div class="card shadow-sm" >
+          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Country</h5>
+            <p class="card-text">
+             Some quick example text to build on the card title and make up the bulk of the
+              card's content.
+            </p>
           </div>
-      </div>
-      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Jazzy Jammin' Times</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">Press Club</li>
-                    <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/jazz1.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Jazi Jeff in Concert</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">QPAC</li>
-                    <li class="list-group-item">Melbourne Street, Southbank</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/jazz2.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Sunday Jazz</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">Riverstage</li>
-                    <li class="list-group-item">59 Gardens Point Rd, Brisbane City</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm" >
-                  <img class="card-img-top" src="img/jazz3.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Hiatus Kaiyote</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-                    <li class="list-group-item">The Triffid</li>
-                    <li class="list-group-item">7/9 Stratton St, Newstead</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-                        <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-                  </div>
-                </div>
-              </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
+            <li class="list-group-item">Press Club</li>
+            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+          </ul>
+          <div class="card-body">
+            <a href="event.html" class="btn btn-primary btn-sm">View details</a>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
           </div>
+        </div>
       </div>
-      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">content 3</div>
-    </div>
-
-
-
-  <div class="row button text-center">
-    <div class="col-xs-12">
-      <button type="button" class="btn btn-primary" disabled>See more</button>
-    </div>
-</div>
-<p class="lead text-left">Trending in your area</p>
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
-  <div class="col">
-    <div class="card shadow-sm">
-      <img src="img/daftpunk.jpg" class="card-img-top" alt="..." width="285" height="180">
-      <div class="card-body">
-        <h5 class="card-title">Daft Punk 'Last Tour'</h5>
-        <p class="card-text">Sun, May 2, 11:59 PM</p>
-        <a href="event.html" class="btn btn-primary btn-sm">Take a look</a>
-        <button type="button" class="btn btn-sm btn-outline-danger" disabled>Booked</button>
-      </div>
+      <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
-  <div class="col">
-    <div class="card shadow-sm">
-      <img src="img/powderfinger.jpg" class="card-img-top" alt="..." width="285" height="180">
-      <div class="card-body">
-        <h5 class="card-title">Powderfinger 'Memories'</h5>
-        <p class="card-text">Sun, May 2, 11:59 PM</p>
-        <a href="event.html" class="btn btn-primary btn-sm">Take a look</a>
-        <button type="button" class="btn btn-sm btn-outline-danger" disabled>Booked</button>
+  <!------------------------------ CATEGORY CLASSICAL ------------------------------------------>  
+  <div class="tab-pane fade" id="pills-classical" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
+      <!------------------------------ CARD ITEM ------------------------------------------>
+      <div class="col">
+        <div class="card shadow-sm" >
+          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Classical</h5>
+            <p class="card-text">
+             Some quick example text to build on the card title and make up the bulk of the
+              card's content.
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
+            <li class="list-group-item">Press Club</li>
+            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+          </ul>
+          <div class="card-body">
+            <a href="event.html" class="btn btn-primary btn-sm">View details</a>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+          </div>
+        </div>
       </div>
+      <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
-  <div class="col">
-    <div class="card shadow-sm">
-      <img src="img/keithurban.jpg" class="card-img-top" alt="..." width="285" height="180">
-      <div class="card-body">
-        <h5 class="card-title">Keith Urban 'World Tour'</h5>
-        <p class="card-text">Sun, May 2, 11:59 PM</p>
-        <a href="event.html" class="btn btn-primary btn-sm">Take a look</a>
-        <button type="button" class="btn btn-sm btn-outline-danger" disabled>Booked</button>
+  <!------------------------------ CATEGORY CLASSICAL ------------------------------------------>  
+  <div class="tab-pane fade" id="pills-classical" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
+      <!------------------------------ CARD ITEM ------------------------------------------>
+      <div class="col">
+        <div class="card shadow-sm" >
+          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Classical</h5>
+            <p class="card-text">
+             Some quick example text to build on the card title and make up the bulk of the
+              card's content.
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
+            <li class="list-group-item">Press Club</li>
+            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+          </ul>
+          <div class="card-body">
+            <a href="event.html" class="btn btn-primary btn-sm">View details</a>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+          </div>
+        </div>
       </div>
+      <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
-  <div class="col">
-    <div class="card shadow-sm">
-      <img src="img/londongrammar.jpg" class="card-img-top" alt="..." width="285" height="180">
-      <div class="card-body">
-        <h5 class="card-title">London Grammar</h5>
-        <p class="card-text">Sun, May 2, 11:59 PM</p>
-        <a href="event.html" class="btn btn-primary btn-sm" >Take a look</a>
-        <button type="button" class="btn btn-sm btn-outline-warning" disabled>Cancelled</button>
+  <!------------------------------ CATEGORY HIP-HOP ------------------------------------------>  
+  <div class="tab-pane fade" id="pills-hiphop" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
+      <!------------------------------ CARD ITEM ------------------------------------------>
+      <div class="col">
+        <div class="card shadow-sm" >
+          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Hip-Hop</h5>
+            <p class="card-text">
+             Some quick example text to build on the card title and make up the bulk of the
+              card's content.
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
+            <li class="list-group-item">Press Club</li>
+            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+          </ul>
+          <div class="card-body">
+            <a href="event.html" class="btn btn-primary btn-sm">View details</a>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+          </div>
+        </div>
       </div>
+      <!------------------------------ END CATEGORY ------------------------------------------>  
+    </div>
+  </div>
+  <!------------------------------ CATEGORY ELECTRONIC ------------------------------------------>  
+  <div class="tab-pane fade" id="pills-electronic" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
+      <!------------------------------ CARD ITEM ------------------------------------------>
+      <div class="col">
+        <div class="card shadow-sm" >
+          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Electronic</h5>
+            <p class="card-text">
+             Some quick example text to build on the card title and make up the bulk of the
+              card's content.
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
+            <li class="list-group-item">Press Club</li>
+            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+          </ul>
+          <div class="card-body">
+            <a href="event.html" class="btn btn-primary btn-sm">View details</a>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+          </div>
+        </div>
+      </div>
+      <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
 </div>
-      
-      
-      </div>
-    </div>
+</div>
 
-    <!-- Modal -->
+
+<!------------------------------ REGISTER (MODAL) ------------------------------------------>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -356,46 +222,47 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
-
-
-        <form>
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail3">
-            </div>
+      <form>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">
+            Email
+          </label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3">
           </div>
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail3">
-            </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">
+            Username
+          </label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3">
           </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword3">
-            </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3">
           </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Confirm</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword3">
-            </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">
+            Confirm
+          </label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3">
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-              I agree to get emails on new listed events on Dayone
-            </label>
-          
-          <p><em>By continuing, you agree to our User Agreement and Privacy Policy.</em></p>
-          </div>
-        </form>
-
-
-
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+          <label class="form-check-label" for="flexCheckChecked">
+            I agree to get emails on new listed events on Dayone
+          </label>
+          <p><em>
+            By continuing, you agree to our User Agreement and Privacy Policy.
+          </em></p>
+        </div>
+      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -404,51 +271,8 @@
     </div>
   </div>
 </div>
+{% endblock %} 
+<!------------------------------ END REGISTER (MODAL) ------------------------------------------>
 
-  </main>
-  <div class="footer container-fluid">
-  <div class="container">
-  <footer class="pt-4 my-md-5 pt-md-5">
-    <div class="row">
-      <div class="col-12 col-md">
-        <img class="mb-2" src="img/logo-black.png" alt="" width="121" height="22">
-        <small class="d-block mb-3 text-muted">&copy; 2021</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Use Dayone</h5>
-        <ul class="list-unstyled text-small">
-          <li class="text-muted">Search Events</li>
-          <li class="text-muted">Host Event</li>
-          <li class="text-muted">Tips in hosting</a></li>
-          <li class="text-muted">FAQ</a></li>
-          <li class="text-muted">Register</a></li>
-          <li class="text-muted">Sign in</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Host Events</h5>
-        <ul class="list-unstyled text-small">
-          <li class="text-muted">Music Festival</li>
-          <li class="text-muted">Jazz Events</li>
-          <li class="text-muted">Silent Disco</li>
-          <li class="text-muted">Dance Party</li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>About</h5>
-        <ul class="list-unstyled text-small">
-          <li class="text-muted" href="#">Team</li>
-          <li class="text-muted" href="#">Pricing</li>
-          <li class="text-muted" href="#">Privacy</li>
-          <li class="text-muted" href="#">Terms</li>
-        </ul>
-      </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-      crossorigin="anonymous"></script>
-  </footer>
-  </div>
-  </div>
 </body>
 </html>
