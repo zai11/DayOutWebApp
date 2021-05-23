@@ -34,7 +34,7 @@
                       <div class="container-fluid">
                         <form class="d-flex">
                           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-primary" type="submit" disabled>Search</button>
+                          <button class="btn btn-primary" type="submit">Search</button>
                         </form>
                       </div>
                     </li>
@@ -43,7 +43,6 @@
                     </li>
                   </ul>
                   <div class="d-grid gap-2 d-md-block">
-                  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
                   <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
                   <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm">Sign in</a>
                   </div>
@@ -64,7 +63,7 @@
      <footer class="pt-4 my-md-5 pt-md-5">
        <div class="row">
          <div class="col-12 col-md">
-           <img class="mb-2" src="{{ url_for('static',filename='img/logo-black.png') }}" alt="" width="121" height="22">
+           <a href="/"><img class="mb-2" src="{{ url_for('static',filename='img/logo-black.png') }}" alt="" width="121" height="22"></a>
            <small class="d-block mb-3 text-muted">
              &copy; 2021
            </small>
