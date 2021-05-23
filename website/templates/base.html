@@ -23,7 +23,7 @@
             <div class="container">
               <nav class="navbar navbar-expand-lg navbar-dark">
               <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"><img src="{{ url_for('static',filename='img/logo.png') }}" alt="" width="121" height="22"></a>
+                <a class="navbar-brand" href="/"><img src="{{ url_for('static',filename='img/logo.png') }}" alt="" width="121" height="22"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                   aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -44,7 +44,8 @@
                   </ul>
                   <div class="d-grid gap-2 d-md-block">
                   <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
-                  <a href="history.html" class="btn btn-outline-light btn-sm">Sign in</a>
+                  <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
+                  <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm">Sign in</a>
                   </div>
                 </div>
               </div>
