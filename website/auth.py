@@ -49,8 +49,8 @@ def register():
             #check if a user exists
             u1 = User.query.filter_by(name=uname).first()
             if u1:
-                flash('User name already exists')
-                #return redirect(url_for('auth.login'))
+                flash('User name already exists, please login')
+                return redirect(url_for('auth.login'))
             # don't store the password - create password hash
             pwd_hash = generate_password_hash(pwd)
             #create a new user model object
