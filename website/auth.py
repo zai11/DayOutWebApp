@@ -64,4 +64,8 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return 'You have been logged out.'
+    nextp = request.args.get('next') #this gives the url from where the login page was accessed
+    print(nextp)
+    if nextp is None or not nextp.startswith('/'):
+        return redirect(url_for('main.index'))
+    return redirect(nextp)
