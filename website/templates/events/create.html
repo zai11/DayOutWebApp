@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Dayout - {{heading}}</title>{% endblock %}
+
+{% block header %}
+<div class="container">
+  <h1 class="display-4 text-white">{{heading}}</h1>
+  <p class="lead text-white">Enter your event details</p>
+</div>
+   </div>
+ </div>
+</div>
+</header>
+{% endblock %}
+
+{{wtf.quick_form(form)}}
