@@ -2,7 +2,7 @@
 from inspect import CO_NESTED
 from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, BooleanField
-from wtforms.fields.core import DateTimeField, IntegerField
+from wtforms.fields.core import DateField, RadioField, SelectField, TimeField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
@@ -34,11 +34,32 @@ class RegisterForm(FlaskForm):
     submit = SubmitField("Register")
 
 # this is the event form
-""" class EventForm(FlaskForm):
-    eventname = StringField('Event Name', validators=[InputRequired('Please enter a event name')])
-    headline = StringField('Headliner', validators=[InputRequired('What is the featured act?')])
+class EventForm(FlaskForm):
+    image = FileField('Image Header', validators=[FileRequired(message='Image can not be empty'),
+                                        FileAllowed(ALLOWED_FILE, message='Only support png, jpg, JPG, PNG, bmp')])
+    title = StringField('Title', validators=[InputRequired()])
+    host = StringField('Host', validators=[InputRequired()])
+    type = SelectField('Type', validators=[InputRequired()],
+                                        choices=[('N/A', '-'), ('1', 'One'), ('2', 'Two'), ('3', 'Three')])
+    venue = StringField('Venue', validators=[InputRequired()])
+    category = SelectField('Category', validators=[InputRequired()],
+                                        choices=[('N/A', '-'), ('1', 'One'), ('2', 'Two'), ('3', 'Three')])
+    frequency = RadioField('Frequency', validators=[InputRequired()],
+                                        choices=[('Once'), ('Weekly'), ('Monthly'), ('Yearly')])
+    start_date = DateField('Start Date', validators=[InputRequired()], format='%d-%m-%Y')
+    end_date = DateField('End Date', validators=[InputRequired()], format='%d-%m-%Y')
+    start_time = TimeField('Start Time', validators=[InputRequired()], format='%H:%M')
+    end_time = TimeField('End Time', validators=[InputRequired()], format='%H:%M')
+    timezone = SelectField('Timezone', validators=[InputRequired()],
+                                        choices=[('N/A', '-'), 
+                                            ('1', '(UTC+8:00) Perth'), 
+                                            ('2', '(UTC+9:30) Adelaide, Darwin'), 
+                                            ('3', '(UTC+10:00) Brisbane'),
+                                            ('4', '(UTC+10:00) Hobart, Canberra, Melbourne, Sydney')])
     description = TextAreaField('Description', validators=[InputRequired()])
-    date = DateTimeField('Date and Time', validators=[InputRequired()])
-    price = IntegerField('Cost per ticket', [validators.NumberRange(min=0, max=100)], widget=NumberInput())
-    image = FileField('Cover Image', validators=[FileRequired(message='Image can not be empty'), FileAllowed(ALLOWED_FILE, message='Only supports png, jpg, JPG, PNG')])
-    submit = SubmitField("Create") """
+    featured_headline = TextAreaField('Featured Headline', validators=[InputRequired()])
+    price = StringField('Price (AUD)', validators=[InputRequired()])
+    quantity = StringField('Quantity (AUD)', validators=[InputRequired()])
+    status = RadioField('Event Status', validators=[InputRequired()],
+                                        choices=[('0', 'Upcoming'), ('1', 'Inactive'), ('2', 'Booked'), ('3', 'Cancelled')])
+    submit=SubmitField("Submit")

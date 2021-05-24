@@ -4,14 +4,143 @@
 
 {% block header %}
 <div class="container">
-  <h1 class="display-4 text-white">Create your event</h1>
-  <p class="lead text-white">Enter your event details</p>
+        <img src="/static/img/user.png" alt="..." width="100" height="100">
+        <h1 class="display-4 text-white">Create your event</h1>
+        <p class="lead text-white">Let's bring everyone together.</p>
+    </div>
 </div>
-   </div>
- </div>
 </div>
-</header>
+</div>
+</div>
 {% endblock %}
 
-{% block content %} 
-{% endblock %} 
+{% block content %}
+<div class="container">
+            <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
+                {{ form.csrf_token() }}
+                <style>
+                    div .control-label{display: none;}
+                    .form-floating > .control-label{
+                        display: inline-block;
+                        color: #999;
+                        top: -8px;
+                        left: 10px;
+                        font-size: 0.85rem;
+                    }
+                    .form-control[type=text], .form-select{height: 55px;}
+                    .form-group, .btn-group{margin-bottom: 15px;}
+                    .row{margin-bottom: 40px;}
+                </style>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="lead text-left">Image header</p>
+                        {{ wtf.form_field(form.image, class='form-control') }}  
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="lead text-left">Event details</p>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.title, class='form-control', placeholder='Title') }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.host, class='form-control', placeholder='Host') }}
+                    </div>
+                    <div class="form-floating col-sm-6">
+                        {% with field = form.type %}
+                            {{ field.label(class='control-label') }}
+                            {{ field(class='form-select', placeholder='Type') }}
+                        {% endwith %}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.venue, class='form-control', placeholder='Venue') }}
+                    </div>
+                    <div class="form-floating col-sm-6">
+                        {% with field = form.category %}
+                            {{ field.label(class='control-label') }}
+                            {{ field(class='form-select', placeholder='Category') }}
+                        {% endwith %}
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="lead text-left">Event date and time</p>
+                    <div class="form-floating col-sm-7">
+                        <div class="btn-group" role="group">
+                            {% for btn in form.frequency %}
+                                {{ btn(class='btn-check') }}
+                                {{ btn.label(class='btn btn-outline-dark') }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.start_date, class='form-control', placeholder='Start Date (dd-mm-yyyy)') }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.end_date, class='form-control', placeholder='End Date (dd-mm-yyyy)') }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.start_time, class='form-control', placeholder='Start Time (hh:mm)') }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.end_time, class='form-control', placeholder='End Time (hh:mm)') }}
+                    </div>
+                    <div class="form-floating col-sm-6">
+                        {% with field = form.timezone %}
+                            {{ field.label(class='control-label') }}
+                            {{ field(class='form-select', placeholder='Timezone') }}
+                        {% endwith %}
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="lead text-left">Description</p>
+                    <div class="col-sm-12">
+                        {{ wtf.form_field(form.description, class='form-control', placeholder='Event information') }}
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="lead text-left">Featured headline</p>
+                    <div class="col-sm-12">
+                        {{ wtf.form_field(form.featured_headline, class='form-control', placeholder='You may include feature guest artists here') }}
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="lead text-left">Create your ticketing</p>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.price, class='form-control', placeholder='Price (AUD)') }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.quantity, class='form-control', placeholder='Quantity') }}
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="lead text-left">Event status</p>
+                    <div class="col-sm-12">
+                        {% for sub_field in form.status %}
+                            <div class="form-check form-check-inline">
+                                {{ sub_field(class='form-check-input') }}
+                                {{ sub_field.label(class='form-check-label') }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>Donec quis arcu ac ipsum consectetur ornare eget sed justo. Suspendisse erat ipsum, ultricies a posuere a, suscipit ac lacus. Pellentesque mauris dolor, egestas non quam dictum, facilisis pharetra sem. Nunc tellus mi, porta quis mi ut, posuere lacinia massa. Nam quis rhoncus nulla. Proin condimentum ac ligula quis aliquet. Sed eleifend vitae neque id tempor. Mauris dictum nibh et libero facilisis luctus. Ut vel faucibus lorem, nec volutpat tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean quam orci, convallis sed neque sed, consectetur auctor tortor. Quisque viverra nec magna non finibus. Aliquam lacinia felis turpis, nec tempus dolor gravida accumsan.</p>
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" onchange="toggleSubmit()">
+                        <label class="form-check-label" for="defaultCheck1">I agree to the DayOut Terms and Service Agreement</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ wtf.form_field(form.submit, class='btn btn-primary btn-large text-center', disabled='disabled') }}
+                    </div>
+                </div>
+            </form>
+            <script>
+                function toggleSubmit() {
+                    chkbox = document.getElementById("defaultCheck1");
+                    btn = document.getElementById("submit");
+                    btn.disabled = !chkbox.checked;
+                }
+            </script>
+</div>
+{% endblock %}

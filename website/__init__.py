@@ -16,6 +16,8 @@ def create_app():
     app.secret_key='utroutoru'
     #set the app configuration data 
     app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///sitedata.sqlite'
+    UPLOAD_FOLDER = '/static/image'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     #initialize db with flask app
     db.init_app(app)
 
@@ -43,8 +45,8 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.bp)
 
-    #from . import events
-    #app.register_blueprint(events.bp)
+    from . import events
+    app.register_blueprint(events.bp)
     
     return app
 
