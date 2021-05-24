@@ -9,7 +9,6 @@ from . import db
 #create a blueprint
 bp = Blueprint('auth', __name__)
 
-
 @bp.route('/login', methods=['GET', 'POST'])
 def login(): #view function
     print('In Login View function')
