@@ -5,6 +5,7 @@ from . import db
 from werkzeug.utils import secure_filename
 import os
 from flask_login import login_required, current_user
+from datetime import datetime
 
 bp = Blueprint('event', __name__, url_prefix='/events')
 
