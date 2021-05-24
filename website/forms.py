@@ -44,7 +44,7 @@ class EventForm(FlaskForm):
     category = SelectField('Category', validators=[InputRequired()],
                                         choices=[('N/A', '-'), ('1', 'One'), ('2', 'Two'), ('3', 'Three')])
     frequency = RadioField('Frequency', validators=[InputRequired()],
-                                        choices=[('Once'), ('Weekly'), ('Monthly'), ('Yearly')])
+                                        choices=[('0', 'Once'), ('1', 'Weekly'), ('2', 'Monthly'), ('3', 'Yearly')])
     start_date = DateField('Start Date', validators=[InputRequired()], format='%d-%m-%Y')
     end_date = DateField('End Date', validators=[InputRequired()], format='%d-%m-%Y')
     start_time = TimeField('Start Time', validators=[InputRequired()], format='%H:%M')
