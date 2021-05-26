@@ -3,11 +3,24 @@
 {% block title %}<title>Dayout - Grow your music event</title>{% endblock %}
 
 {% block header %}
+
+
 <div class="container">
+  {% if current_user.is_authenticated and current_user.is_admin %} 
+
   <h1 class="display-4 text-white">Grow your music event</h1>
   <p class="lead text-white">Make it something that everyone is talking about</p>
   <a href="{{ url_for('event.create') }}" class="btn btn-primary btn-lg">Create event</a>
+
+  {% else %} 
+
+  <h1 class="display-4 text-white">Grow your music event</h1>
+  <p class="lead text-white">Register now as an admin to start today</p>
+  <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">Register</a>
+
+  {% endif %}
 </div>
+
    </div>
  </div>
 </div>
