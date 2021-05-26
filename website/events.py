@@ -16,7 +16,7 @@ def check_upload_file(form):
     BASE_PATH = os.path.dirname(__file__)
 
     upload_path = os.path.join(BASE_PATH, 'static/image/', secure_filename(filename))
-    dp_upload_path='static/image/' + secure_filename(filename)
+    dp_upload_path='/static/image/' + secure_filename(filename)
     fp.save(upload_path)
     return dp_upload_path
 
