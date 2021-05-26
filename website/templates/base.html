@@ -39,9 +39,11 @@
                         </form>
                       </div>
                     </li>
+                    {% if current_user.is_authenticated and current_user.is_admin %} 
                     <li class="nav-item">
                       <a class="nav-link" href="{{ url_for('static',filename='events/create.html') }}">Create event</a>
                     </li>
+                    {% endif %} 
                   </ul>
                   <div class="d-grid gap-2 d-md-block">
                   {% if current_user.is_authenticated %} 
