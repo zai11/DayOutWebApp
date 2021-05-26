@@ -1,7 +1,7 @@
 
 from inspect import CO_NESTED
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, BooleanField
+from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, BooleanField, IntegerField
 from wtforms.fields.core import DateField, RadioField, SelectField, TimeField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
@@ -66,3 +66,10 @@ class EventForm(FlaskForm):
 class CommentForm(FlaskForm):
     text = TextAreaField('Comment', validators=[InputRequired()])  
     submit = SubmitField('Comment')
+
+class BookingForm(FlaskForm):
+    tickets_booked = IntegerField('Quantity of Tickets', validators=[InputRequired()])
+    
+
+
+

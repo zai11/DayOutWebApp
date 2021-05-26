@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event, Comment
+from .models import Booking, Event, Comment
 from .forms import EventForm
-from .forms import CommentForm
+from .forms import BookingForm
 from . import db
 from werkzeug.utils import secure_filename
 import os
@@ -21,11 +21,13 @@ def check_upload_file(form):
     return dp_upload_path
 
 
-@bp.route('/<id>')
+@bp.route('/<id>', methods = ['GET', 'POST'])
 def show(id):
     event = Event.query.filter_by(id=id).first()
-    comment_form = CommentForm()
-    return render_template('events/show.html', event=event, cform=comment_form)
+    booking = BookingForm()
+    if booking.validate_on_submit():
+      booking = Booking(tickets_booked=booking.tickets_booked.data)
+    return render_template('events/show.html',event = event, booking=booking)
 
 
 @bp.route('/create', methods = ['GET', 'POST'])
