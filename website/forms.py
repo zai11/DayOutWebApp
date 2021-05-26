@@ -62,3 +62,7 @@ class EventForm(FlaskForm):
     status = RadioField('Event Status', validators=[InputRequired()],
                                         choices=[('0', 'Upcoming'), ('1', 'Inactive'), ('2', 'Booked'), ('3', 'Cancelled')])
     submit=SubmitField("Submit")
+
+class CommentForm(FlaskForm):
+    text = TextAreaField('Comment', validators=[InputRequired()])  
+    submit = SubmitField('Comment')

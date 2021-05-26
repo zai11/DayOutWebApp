@@ -5,7 +5,7 @@
 {% block header %}
 <div class="container">
   <div class="col-md-1"></div>
-    <div class="eventimage col-md-10 text-center"><img src="{{ url_for('static',filename='image/jazz-header-event_1.jpg') }}" class="rounded img-fluid shadow" alt="...">
+    <div class="eventimage col-md-10 text-center"><img src="{{event.image}}" class="rounded img-fluid shadow" alt="{{event.title}}">
 </div>
     <div class="col-md-1"></div>
   </div>
@@ -23,16 +23,16 @@
 <div class="container">
 <div class="row description">
 <div class="col-md-9">
-<h1 class="display-6"> [[ event title ]]</h1>
-<p class="lead">[[ event description ]]</p>
+<h1 class="display-6">{{event.title}}</h1>
+<p class="lead">{{event.description}}</p>
 </p>
 </div>
 <div class="col-md-3 float-right">
 
 <div class="d-grid gap-2">
-<button class="btn btn-outline-success btn-lg" type="button" disabled>[[event status ]]</button>
-<button class="btn btn-outline-dark btn-lg" type="button" disabled>[[event date & time ]]</button>
-<button class="btn btn-outline-dark btn-lg" type="button" disabled>[[ price]]</button>
+<button class="btn btn-outline-success btn-lg" type="button" disabled>{{event.status}}</button>
+<button class="btn btn-outline-dark btn-lg" type="button" disabled>{{event.start_date}}</button>
+<button class="btn btn-outline-dark btn-lg" type="button" disabled>{{event.price}}</button>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book event</button>
 <button class="btn btn-dark btn-sm" type="button" disabled><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">

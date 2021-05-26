@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event#, Comment
-from .forms import EventForm#, CommentForm
+from .models import Event, Comment
+from .forms import EventForm
+from .forms import CommentForm
 from . import db
 from werkzeug.utils import secure_filename
 import os
@@ -14,18 +15,18 @@ def check_upload_file(form):
     filename = fp.filename
     BASE_PATH = os.path.dirname(__file__)
 
-    upload_path = os.path.join(BASE_PATH, 'static/image', secure_filename(filename))
-    dp_upload_path='/static/image' + secure_filename(filename)
+    upload_path = os.path.join(BASE_PATH, 'static/image/', secure_filename(filename))
+    dp_upload_path='static/image/' + secure_filename(filename)
     fp.save(upload_path)
     return dp_upload_path
 
 
-""" @bp.route('/<id>')
+@bp.route('/<id>')
 def show(id):
     event = Event.query.filter_by(id=id).first()
     comment_form = CommentForm()
     return render_template('events/show.html', event=event, cform=comment_form)
-"""
+
 
 @bp.route('/create', methods = ['GET', 'POST'])
 #@login_required
