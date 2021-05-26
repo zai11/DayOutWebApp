@@ -1,6 +1,6 @@
 # Ignore pycache
 __pycache__
-website/__pychache__
+website/__pycache__
 *.pyc
 # Ignore the weird settings
 .vscode/settings.json
