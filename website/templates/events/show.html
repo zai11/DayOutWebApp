@@ -107,7 +107,7 @@
         <input type="text" class="form-control" placeholder="Phone" aria-label="Last name">
       </div>
     </div> -->
-
+<!-- 
               <div class="row header">
                 <div class="col-xs-12">
                   <p class="lead">Payment Details</p>
@@ -135,12 +135,15 @@
                   <input type="text" class="form-control" placeholder="CVV" aria-label="Zip" id="cvvnumber">
                   <div id="cvvnumber" class="form-text">3 digits</div>
                 </div>
-              </div>
-              <div class="modal-footer">
+              </div> -->
+              <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" data-bs-target="#modal2" data-bs-toggle="modal"
                   data-bs-dismiss="modal">Buy</button>
-              </div>
+              </div> -->
+              <div class="col-sm-6">
+                {{ wtf.form_field(booking.submit, class='btn btn-primary btn-large text-center') }}
+            </div>
             </div>
           </div>
         </div>
