@@ -1,10 +1,13 @@
 #import flask - from the package import class
-from flask import Flask 
+from flask import Flask, render_template 
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 db=SQLAlchemy()
+
+def error_404(e):
+  return render_template('error404.html'), 404
 
 #create a function that creates a web application
 # a web server will run this web application
@@ -12,6 +15,8 @@ def create_app():
   
     app=Flask(__name__)  # this is the name of the module/package that is calling this app
     app.debug=True
+    app.register_error_handler(404, error_404)
+
     from . import models
     app.secret_key='utroutoru'
     #set the app configuration data 
