@@ -24,12 +24,12 @@ def check_upload_file(form):
 @bp.route('/<id>', methods = ['GET', 'POST'])
 def show(id):
     event = Event.query.filter_by(id=id).first()
-    booking = BookingForm()    
-    if booking.validate_on_submit():
-      booking = Booking(tickets_booked=booking.tickets_booked.data)
+    form = BookingForm()    
+    if form.validate_on_submit():
+      booking = Booking(tickets_booked=form.tickets_booked.data)
       db.session.add(booking)
       db.session.commit()
-    return render_template('events/show.html', event = event, booking=booking)
+    return render_template('events/show.html', event = event, form=form)
 
 
 @bp.route('/create', methods = ['GET', 'POST'])
