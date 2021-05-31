@@ -55,12 +55,10 @@
 <!------------------------------ CARDS ------------------------------------------>
 
 <div class="tab-content" id="pills-tabContent">
- 
   <!------------------------------ CATEGORY JAZZ ------------------------------------------>  
   <div class="tab-pane fade show active" id="pills-jazz" role="tabpanel" aria-labelledby="pills-home-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
       <!------------------------------ CARD ITEM ------------------------------------------>
-      {% if events %}
       {% for event in events %}
       {% if event.category == "Jazz" %}
       <div class="col">
@@ -69,54 +67,54 @@
           <div class="card-body">
             <h5 class="card-title">{{event.title}}</h5>
             <p class="card-text">
-             Some quick example text to build on the card title and make up the bulk of the
-              card's content.
+             {{event.featured_headline}}
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-            <li class="list-group-item">Press Club</li>
-            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+            <li class="list-group-item">{{event.start_date}}</li>
+            <li class="list-group-item">{{event.location}}</li>
+            <li class="list-group-item">{{event.timezone}}</li>
           </ul>
           <div class="card-body">
             <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
       {% endif %}
       {% endfor %}
-      {% endif %}
+
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
-
-
   <!------------------------------ CATEGORY COUNTRY ------------------------------------------>  
   <div class="tab-pane fade" id="pills-country" role="tabpanel" aria-labelledby="pills-profile-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
       <!------------------------------ CARD ITEM ------------------------------------------>
+      {% for event in events %}
+      {% if event.category == "Country" %}
       <div class="col">
         <div class="card shadow-sm" >
-          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Country</h5>
+            <h5 class="card-title">{{event.title}}</h5>
             <p class="card-text">
-             Some quick example text to build on the card title and make up the bulk of the
-              card's content.
+             {{event.featured_headline}}
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-            <li class="list-group-item">Press Club</li>
-            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+            <li class="list-group-item">{{event.start_date}}</li>
+            <li class="list-group-item">{{event.location}}</li>
+            <li class="list-group-item">{{event.timezone}}</li>
           </ul>
           <div class="card-body">
             <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
+      {% endif %}
+      {% endfor %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
@@ -124,27 +122,30 @@
   <div class="tab-pane fade" id="pills-classical" role="tabpanel" aria-labelledby="pills-profile-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
       <!------------------------------ CARD ITEM ------------------------------------------>
+      {% for event in events %}
+      {% if event.category == "Classical" %}
       <div class="col">
         <div class="card shadow-sm" >
-          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Classical</h5>
+            <h5 class="card-title">{{event.title}}</h5>
             <p class="card-text">
-             Some quick example text to build on the card title and make up the bulk of the
-              card's content.
+             {{event.featured_headline}}
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-            <li class="list-group-item">Press Club</li>
-            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+            <li class="list-group-item">{{event.start_date}}</li>
+            <li class="list-group-item">{{event.location}}</li>
+            <li class="list-group-item">{{event.timezone}}</li>
           </ul>
           <div class="card-body">
             <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
+      {% endif %}
+      {% endfor %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
@@ -152,27 +153,30 @@
   <div class="tab-pane fade" id="pills-classical" role="tabpanel" aria-labelledby="pills-profile-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
       <!------------------------------ CARD ITEM ------------------------------------------>
+      {% for event in events %}
+      {% if event.category == "Hip-Hop" %}
       <div class="col">
         <div class="card shadow-sm" >
-          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Classical</h5>
+            <h5 class="card-title">{{event.title}}</h5>
             <p class="card-text">
-             Some quick example text to build on the card title and make up the bulk of the
-              card's content.
+             {{event.featured_headline}}
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-            <li class="list-group-item">Press Club</li>
-            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+            <li class="list-group-item">{{event.start_date}}</li>
+            <li class="list-group-item">{{event.location}}</li>
+            <li class="list-group-item">{{event.timezone}}</li>
           </ul>
           <div class="card-body">
             <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
+      {% endif %}
+      {% endfor %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
@@ -180,55 +184,30 @@
   <div class="tab-pane fade" id="pills-hiphop" role="tabpanel" aria-labelledby="pills-profile-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
       <!------------------------------ CARD ITEM ------------------------------------------>
+      {% for event in events %}
+      {% if event.category == "Electronic" %}
       <div class="col">
         <div class="card shadow-sm" >
-          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
+          <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Hip-Hop</h5>
+            <h5 class="card-title">{{event.title}}</h5>
             <p class="card-text">
-             Some quick example text to build on the card title and make up the bulk of the
-              card's content.
+             {{event.featured_headline}}
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-            <li class="list-group-item">Press Club</li>
-            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
+            <li class="list-group-item">{{event.start_date}}</li>
+            <li class="list-group-item">{{event.location}}</li>
+            <li class="list-group-item">{{event.timezone}}</li>
           </ul>
           <div class="card-body">
             <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
+            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
-      <!------------------------------ END CATEGORY ------------------------------------------>  
-    </div>
-  </div>
-  <!------------------------------ CATEGORY ELECTRONIC ------------------------------------------>  
-  <div class="tab-pane fade" id="pills-electronic" role="tabpanel" aria-labelledby="pills-profile-tab">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
-      <!------------------------------ CARD ITEM ------------------------------------------>
-      <div class="col">
-        <div class="card shadow-sm" >
-          <img class="card-img-top" src="img/jazz.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Electronic</h5>
-            <p class="card-text">
-             Some quick example text to build on the card title and make up the bulk of the
-              card's content.
-            </p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Sun, May 2, 11:59 PM</li>
-            <li class="list-group-item">Press Club</li>
-            <li class="list-group-item">339 Brunswick St, Fortitude Valley</li>
-          </ul>
-          <div class="card-body">
-            <a href="event.html" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>Upcoming</button>
-          </div>
-        </div>
-      </div>
+      {% endif %}
+      {% endfor %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
