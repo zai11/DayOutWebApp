@@ -55,11 +55,14 @@
 <!------------------------------ CARDS ------------------------------------------>
 
 <div class="tab-content" id="pills-tabContent">
+ 
   <!------------------------------ CATEGORY JAZZ ------------------------------------------>  
   <div class="tab-pane fade show active" id="pills-jazz" role="tabpanel" aria-labelledby="pills-home-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
       <!------------------------------ CARD ITEM ------------------------------------------>
+      {% if events %}
       {% for event in events %}
+      {% if event.category == "Jazz" %}
       <div class="col">
         <div class="card shadow-sm" >
           <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
@@ -81,10 +84,14 @@
           </div>
         </div>
       </div>
+      {% endif %}
       {% endfor %}
+      {% endif %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
+
+
   <!------------------------------ CATEGORY COUNTRY ------------------------------------------>  
   <div class="tab-pane fade" id="pills-country" role="tabpanel" aria-labelledby="pills-profile-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
