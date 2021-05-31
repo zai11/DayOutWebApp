@@ -5,6 +5,7 @@ from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField
 from wtforms.fields.core import DateField, RadioField, SelectField, TimeField
 from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
+from wtforms import HiddenField
 
 
 ALLOWED_FILE = {'png', 'jpg', 'PNG', 'JPG'}
@@ -65,6 +66,8 @@ class CommentForm(FlaskForm):
 
 class BookingForm(FlaskForm):
     tickets_booked = IntegerField('Quantity of Tickets', validators=[InputRequired()])
+    user = HiddenField('user')
+    event = HiddenField('event')
     submit=SubmitField("Submit")
     
 

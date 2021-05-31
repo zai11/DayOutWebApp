@@ -53,6 +53,7 @@
       </div>
       {% if current_user.is_authenticated %}
       <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
+        {{ form.csrf_token() }}
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -68,8 +69,12 @@
                 </div>
 
                 <div class="col-sm-6">
+                  hello {{current_user.name}}
                   {{ wtf.form_field(form.tickets_booked, class='form-control', placeholder='Quantity') }}
+                  {{ wtf.form_field(form.event, class='form-control', value = event.id) }}
+                  {{ wtf.form_field(form.user, class='form-control', value = current_user.name) }}
                 </div>
+                
 
                 <div class="col-sm-6">
                   {{ wtf.form_field(form.submit, class='btn btn-primary btn-large text-center', disabled=false) }}
