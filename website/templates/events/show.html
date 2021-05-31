@@ -6,7 +6,9 @@
 {% block header %}
 <div class="container">
   <div class="col-md-1"></div>
-  <div class="image"><div class="img img-responsive full-width"><img src="{{event.image}}" class="rounded img-fluid shadow"alt="{{event.title}}"></div>
+  <div class="image">
+    <div class="img img-responsive full-width"><img src="{{event.image}}" class="rounded img-fluid shadow"
+        alt="{{event.title}}"></div>
   </div>
   <div class="col-md-1"></div>
 </div>
@@ -49,123 +51,53 @@
         </div>
 
       </div>
-      <!-- Modal -->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Ticket Order</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="row header">
-                
+      {% if current_user.is_authenticated %}
+      <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ticket Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
+              <div class="modal-body">
+                <div class="row header">
 
-              <div class="col-sm-6">
-                {{ wtf.form_field(booking.tickets_booked, class='form-control', placeholder='Quantity') }}
-              </div>
-<!-- 
-              <div class="row form">
-                <div class="col">
-                  <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                      <option selected>-</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
-                    <label for="floatingSelect">Quantity</label>
-                  </div>
                 </div>
 
-              </div> -->
-
-
-              <!-- <div class="row header">
-      <div class="col-xs-12">
-        <p class="lead">Buyer Information</p>
-      </div>
-    </div>
-
-    <div class="row form">
-      <div class="col">
-        <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-      </div>
-    </div>
-
-    <div class="row form">
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Email" aria-label="First name">
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Phone" aria-label="Last name">
-      </div>
-    </div> -->
-<!-- 
-              <div class="row header">
-                <div class="col-xs-12">
-                  <p class="lead">Payment Details</p>
+                <div class="col-sm-6">
+                  {{ wtf.form_field(booking.tickets_booked, class='form-control', placeholder='Quantity') }}
                 </div>
-              </div>
 
-              <div class="row form g-3">
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" placeholder="Card Holder Name" aria-label="First name">
+                <div class="col-sm-6">
+                  {{ wtf.form_field(booking.submit, class='btn btn-primary btn-large text-center', disabled=false) }}
                 </div>
-                <div class="col-sm"></div>
-                <div class="col-sm"></div>
-              </div>
-
-
-              <div class="row g-3">
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" placeholder="Card Number" aria-label="City">
-                </div>
-                <div class="col-sm">
-                  <input type="text" class="form-control" placeholder="Expire" aria-label="State" id="expiredate">
-                  <div id="expiredate" class="form-text">MM/YY</div>
-                </div>
-                <div class="col-sm">
-                  <input type="text" class="form-control" placeholder="CVV" aria-label="Zip" id="cvvnumber">
-                  <div id="cvvnumber" class="form-text">3 digits</div>
-                </div>
-              </div> -->
-              <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-bs-target="#modal2" data-bs-toggle="modal"
-                  data-bs-dismiss="modal">Buy</button>
-              </div> -->
-              <div class="col-sm-6">
-                {{ wtf.form_field(booking.submit, class='btn btn-primary btn-large text-center') }}
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Second modal dialog -->
-      <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Order completed</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <img src="/static/image/checked.png" class="mx-auto d-block" alt="Tick Box" width="100" height="100">
-              <p class="lead">Thank you for your purchase. Your tickets will be sent to your nominated email. Have a
-                great Dayout!</p>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <!-- Second modal dialog -->
+        <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Order completed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <img src="/static/image/checked.png" class="mx-auto d-block" alt="Tick Box" width="100" height="100">
+                <p class="lead">Thank you for your purchase. Your tickets will be sent to your nominated email. Have a
+                  great Dayout!</p>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
 
     </div>
     <p class="lead text-left">Reviews</p>

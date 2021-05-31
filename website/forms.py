@@ -47,16 +47,16 @@ class EventForm(FlaskForm):
     end_time = TimeField('End Time', validators=[InputRequired()], format='%H:%M')
     timezone = SelectField('Timezone', validators=[InputRequired()],
                                         choices=[('N/A', '-'), 
-                                            ('1', '(UTC+8:00) Perth'), 
-                                            ('2', '(UTC+9:30) Adelaide, Darwin'), 
-                                            ('3', '(UTC+10:00) Brisbane'),
-                                            ('4', '(UTC+10:00) Hobart, Canberra, Melbourne, Sydney')])
+                                            ('Perth', '(UTC+8:00) Perth'), 
+                                            ('Adelaide, Darwin', '(UTC+9:30) Adelaide, Darwin'), 
+                                            ('Brisbane', '(UTC+10:00) Brisbane'),
+                                            ('Hobart, Canberra, Melbourne, Sydney', '(UTC+10:00) Hobart, Canberra, Melbourne, Sydney')])
     description = TextAreaField('Description', validators=[InputRequired()])
     featured_headline = TextAreaField('Featured Headline', validators=[InputRequired()])
     price = StringField('Price (AUD)', validators=[InputRequired()])
     quantity = StringField('Quantity (AUD)', validators=[InputRequired()])
     status = RadioField('Event Status', validators=[InputRequired()],
-                                        choices=[('0', 'Upcoming'), ('1', 'Inactive'), ('2', 'Booked'), ('3', 'Cancelled')])
+                                        choices=[('Upcoming', 'Upcoming'), ('Inactive', 'Inactive'), ('Booked', 'Booked'), ('Cancelled', 'Cancelled')])
     submit=SubmitField("Submit")
 
 class CommentForm(FlaskForm):
