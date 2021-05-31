@@ -40,7 +40,7 @@ class EventForm(FlaskForm):
     host = StringField('Host', validators=[InputRequired()])
     venue = StringField('Venue', validators=[InputRequired()])
     category = SelectField('Category', validators=[InputRequired()],
-                                        choices=[('N/A', '-'), ('1', 'One'), ('2', 'Two'), ('3', 'Three')])
+                                        choices=[('N/A', '-'), ('Jazz', 'Jazz'), ('Country', 'Country'), ('Classical', 'Classical'), ('Hip-Hop', 'Hip-Hop'), ('Electronic', 'Electronic')])
     start_date = DateField('Start Date', validators=[InputRequired()], format='%d-%m-%Y')
     end_date = DateField('End Date', validators=[InputRequired()], format='%d-%m-%Y')
     start_time = TimeField('Start Time', validators=[InputRequired()], format='%H:%M')
