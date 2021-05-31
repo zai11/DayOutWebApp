@@ -26,7 +26,11 @@ def show(id):
     event = Event.query.filter_by(id=id).first()
     form = BookingForm()    
     if form.validate_on_submit():
-      booking = Booking(tickets_booked=form.tickets_booked.data)
+      
+      booking = Booking(tickets_booked=form.tickets_booked.data, user_id = form.user.data, event_id = form.event.data)
+      # if booking.tickets_booked > event.ticket_capacity
+        
+
       db.session.add(booking)
       db.session.commit()
     return render_template('events/show.html', event = event, form=form)

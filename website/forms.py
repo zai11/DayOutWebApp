@@ -66,8 +66,8 @@ class CommentForm(FlaskForm):
 
 class BookingForm(FlaskForm):
     tickets_booked = IntegerField('Quantity of Tickets', validators=[InputRequired()])
-    user = HiddenField('user')
-    event = HiddenField('event')
+    user = HiddenField('')
+    event = HiddenField('')
     submit=SubmitField("Submit")
     
 
