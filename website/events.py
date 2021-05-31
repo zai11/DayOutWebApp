@@ -24,13 +24,16 @@ def check_upload_file(form):
 @bp.route('/<id>', methods = ['GET', 'POST'])
 def show(id):
     event = Event.query.filter_by(id=id).first()
-    form = BookingForm()    
+    form = BookingForm()   
+    
     if form.validate_on_submit():
       
       booking = Booking(tickets_booked=form.tickets_booked.data, user_id = form.user.data, event_id = form.event.data)
       # if booking.tickets_booked > event.ticket_capacity
-        
-
+      dtabasbe = db.session.execute("SELECT tickets_booked FROM events WHERE id = " + booking.event_id)
+      names = [row[0] for row in dtabasbe]
+      print(names)
+      db.session.execute("UPDATE events SET tickets_booked = (SELECT tickets_booked FROM events) + " + str(booking.tickets_booked))
       db.session.add(booking)
       db.session.commit()
     return render_template('events/show.html', event = event, form=form)
