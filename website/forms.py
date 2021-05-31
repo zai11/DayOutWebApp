@@ -1,9 +1,9 @@
 
 from inspect import CO_NESTED
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, BooleanField, IntegerField
+from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, BooleanField, IntegerField, DecimalField
 from wtforms.fields.core import DateField, RadioField, SelectField, TimeField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
 
@@ -53,8 +53,8 @@ class EventForm(FlaskForm):
                                             ('Hobart, Canberra, Melbourne, Sydney', '(UTC+10:00) Hobart, Canberra, Melbourne, Sydney')])
     description = TextAreaField('Description', validators=[InputRequired()])
     featured_headline = TextAreaField('Featured Headline', validators=[InputRequired()])
-    price = StringField('Price (AUD)', validators=[InputRequired()])
-    quantity = StringField('Quantity (AUD)', validators=[InputRequired()])
+    price = DecimalField('Price (AUD)', validators=[InputRequired(), NumberRange(min=0, message="Please enter a valid price")])
+    quantity = IntegerField('Quantity (AUD)', validators=[InputRequired(), NumberRange(min=0, message="Please enter a valid quantity")])
     status = RadioField('Event Status', validators=[InputRequired()],
                                         choices=[('Upcoming', 'Upcoming'), ('Inactive', 'Inactive'), ('Booked', 'Booked'), ('Cancelled', 'Cancelled')])
     submit=SubmitField("Submit")
