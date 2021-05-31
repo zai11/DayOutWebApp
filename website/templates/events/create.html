@@ -53,12 +53,6 @@
                     <div class="col-sm-6">
                         {{ wtf.form_field(form.host, class='form-control', placeholder='Host') }}
                     </div>
-                    <div class="form-floating col-sm-6">
-                        {% with field = form.type %}
-                            {{ field.label(class='control-label') }}
-                            {{ field(class='form-select', placeholder='Type') }}
-                        {% endwith %}
-                    </div>
                     <div class="col-sm-6">
                         {{ wtf.form_field(form.venue, class='form-control', placeholder='Venue') }}
                     </div>
@@ -71,14 +65,6 @@
                 </div>
                 <div class="row">
                     <p class="lead text-left">Event date and time</p>
-                    <div class="form-floating col-sm-7">
-                        <div class="btn-group" role="group">
-                            {% for btn in form.frequency %}
-                                {{ btn(class='btn-check') }}
-                                {{ btn.label(class='btn btn-outline-dark') }}
-                            {% endfor %}
-                        </div>
-                    </div>
                     <div class="col-sm-6">
                         {{ wtf.form_field(form.start_date, class='form-control', placeholder='Start Date (dd-mm-yyyy)') }}
                     </div>

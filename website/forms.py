@@ -38,13 +38,9 @@ class EventForm(FlaskForm):
                                         FileAllowed(ALLOWED_FILE, message='Only support png, jpg, JPG, PNG, bmp')])
     title = StringField('Title', validators=[InputRequired()])
     host = StringField('Host', validators=[InputRequired()])
-    type = SelectField('Type', validators=[InputRequired()],
-                                        choices=[('N/A', '-'), ('1', 'One'), ('2', 'Two'), ('3', 'Three')])
     venue = StringField('Venue', validators=[InputRequired()])
     category = SelectField('Category', validators=[InputRequired()],
                                         choices=[('N/A', '-'), ('1', 'One'), ('2', 'Two'), ('3', 'Three')])
-    frequency = RadioField('Frequency', validators=[InputRequired()],
-                                        choices=[('0', 'Once'), ('1', 'Weekly'), ('2', 'Monthly'), ('3', 'Yearly')])
     start_date = DateField('Start Date', validators=[InputRequired()], format='%d-%m-%Y')
     end_date = DateField('End Date', validators=[InputRequired()], format='%d-%m-%Y')
     start_time = TimeField('Start Time', validators=[InputRequired()], format='%H:%M')
