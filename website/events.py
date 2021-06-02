@@ -1,3 +1,4 @@
+import re
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Booking, Event, Comment
 from .forms import EventForm
@@ -25,17 +26,23 @@ def check_upload_file(form):
 def show(id):
     event = Event.query.filter_by(id=id).first()
     form = BookingForm()   
-    
-    if form.validate_on_submit():
-      
+    error=None
+    if form.validate_on_submit():      
       booking = Booking(tickets_booked=form.tickets_booked.data, user_id = form.user.data, event_id = form.event.data)
-      # if booking.tickets_booked > event.ticket_capacity
-      dtabasbe = db.session.execute("SELECT tickets_booked FROM events WHERE id = " + booking.event_id)
-      names = [row[0] for row in dtabasbe]
-      print(names)
-      db.session.execute("UPDATE events SET tickets_booked = (SELECT tickets_booked FROM events) + " + str(booking.tickets_booked))
-      db.session.add(booking)
-      db.session.commit()
+      
+      result1 = db.session.execute("SELECT tickets_booked FROM events WHERE id = " + booking.event_id)
+      result2 = db.session.execute("SELECT ticket_capacity FROM events WHERE id = " + booking.event_id)     
+      allowed_tickets = result2.first()[0] - result1.first()[0]    
+      print(allowed_tickets)
+      print(booking.tickets_booked)
+
+      if booking.tickets_booked > allowed_tickets:
+        print("error to many tickets booked")
+        flash("Please reduce the number of tickets you would like to purchase")
+      else:
+        db.session.execute("UPDATE events SET tickets_booked = tickets_booked + " + str(booking.tickets_booked) + " WHERE id = " + booking.event_id)
+        db.session.add(booking)
+        db.session.commit()
     return render_template('events/show.html', event = event, form=form)
 
 

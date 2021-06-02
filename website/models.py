@@ -33,7 +33,7 @@ class Event(db.Model):
     end_date = db.Column(db.DateTime, default=datetime.now())
     timezone = db.Column(db.String(100))
     ticket_capacity = db.Column(db.Integer)
-    tickets_booked = db.Column(db.Integer)
+    tickets_booked = db.Column(db.Integer,  default=0)
     price = db.Column(db.DECIMAL(6,2))
 
 
@@ -57,6 +57,8 @@ class Booking(db.Model):
 
     def __repr__(self):
         return "<Booking: {}>".format(self.text)
+
+
 
 
 class Comment(db.Model):
