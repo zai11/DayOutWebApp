@@ -77,7 +77,17 @@
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
+            <button type="button" class='btn btn-sm 
+            {% if event.status == "Upcoming" %}
+            btn-outline-success
+            {% elif event.status == "Inactive" %}
+            btn-outline-warning
+            {% elif event.status == "Booked" %}
+            btn-outline-info
+            {% elif event.status == "Cancelled" %}
+            btn-outline-danger
+            {% endif %}
+            'disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
@@ -109,7 +119,17 @@
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
+            <button type="button" class='btn btn-sm 
+            {% if event.status == "Upcoming" %}
+            btn-outline-success
+            {% elif event.status == "Inactive" %}
+            btn-outline-warning
+            {% elif event.status == "Booked" %}
+            btn-outline-info
+            {% elif event.status == "Cancelled" %}
+            btn-outline-danger
+            {% endif %}
+            'disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
@@ -140,7 +160,17 @@
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
+            <button type="button" class='btn btn-sm 
+            {% if event.status == "Upcoming" %}
+            btn-outline-success
+            {% elif event.status == "Inactive" %}
+            btn-outline-warning
+            {% elif event.status == "Booked" %}
+            btn-outline-info
+            {% elif event.status == "Cancelled" %}
+            btn-outline-danger
+            {% endif %}
+            'disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
@@ -171,7 +201,17 @@
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
+            <button type="button" class='btn btn-sm 
+            {% if event.status == "Upcoming" %}
+            btn-outline-success
+            {% elif event.status == "Inactive" %}
+            btn-outline-warning
+            {% elif event.status == "Booked" %}
+            btn-outline-info
+            {% elif event.status == "Cancelled" %}
+            btn-outline-danger
+            {% endif %}
+            'disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
@@ -202,7 +242,17 @@
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
-            <button type="button" class="btn btn-sm btn-outline-success" disabled>{{event.status}}</button>
+            <button type="button" class='btn btn-sm 
+            {% if event.status == "Upcoming" %}
+            btn-outline-success
+            {% elif event.status == "Inactive" %}
+            btn-outline-warning
+            {% elif event.status == "Booked" %}
+            btn-outline-info
+            {% elif event.status == "Cancelled" %}
+            btn-outline-danger
+            {% endif %}
+            'disabled>{{event.status}}</button>
           </div>
         </div>
       </div>
