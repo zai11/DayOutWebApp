@@ -22,7 +22,7 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     user_name=StringField("User Name", validators=[InputRequired()])
     email_id = StringField("Email Address", validators=[Email("Please enter a valid email")])
-    phone_number = StringField("Phone Number", validators=[InputRequired()])
+    phone_number = IntegerField("Phone Number", validators=[InputRequired()])
     address = StringField("Address", validators=[InputRequired()])
     is_admin = BooleanField("Is Admin", validators=[])
     #add buyer/seller - check if it is a buyer or seller hint : Use RequiredIf field
