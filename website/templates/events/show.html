@@ -38,8 +38,22 @@
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>${{event.price}}</button>
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>Tickets Remaining: <br> {{event.ticket_capacity-event.tickets_booked}}</button>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop">Book event</button>
+        
+        <!-- 
+          If a user is logged in, the button acts as a model for booking
+          If an admin is logged in, the button is disabled.
+          If the user is not logged in, the button is disabled and says "Login to Book"
+         -->
+        <button type="button" class="btn btn-primary btn-lg" 
+        {% if current_user.is_authenticated and not current_user.is_admin %} 
+        data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book event
+        {% elif not current_user.is_authenticated%}
+        disabled>Login to Book
+        {% else %}
+        disabled>Book event
+        {% endif %}
+        </button>
+
         <button class="btn btn-dark btn-sm" type="button" disabled><svg xmlns="http://www.w3.org/2000/svg" width="14"
             height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
             <path
