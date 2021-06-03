@@ -2,7 +2,8 @@
 from inspect import CO_NESTED
 from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, BooleanField, IntegerField, DecimalField
-from wtforms.fields.core import DateField, RadioField, SelectField, TimeField
+from wtforms.fields.html5 import DateTimeLocalField
+from wtforms.fields.core import RadioField, SelectField
 from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 from wtforms import HiddenField
@@ -42,10 +43,8 @@ class EventForm(FlaskForm):
     venue = StringField('Venue', validators=[InputRequired()])
     category = SelectField('Category', validators=[InputRequired()],
                                         choices=[('N/A', '-'), ('Jazz', 'Jazz'), ('Country', 'Country'), ('Classical', 'Classical'), ('Hip-Hop', 'Hip-Hop'), ('Electronic', 'Electronic')])
-    start_date = DateField('Start Date', validators=[InputRequired()], format='%d-%m-%Y')
-    end_date = DateField('End Date', validators=[InputRequired()], format='%d-%m-%Y')
-    start_time = TimeField('Start Time', validators=[InputRequired()], format='%H:%M')
-    end_time = TimeField('End Time', validators=[InputRequired()], format='%H:%M')
+    start_date = DateTimeLocalField('Start Time', validators=[InputRequired()], format='%Y-%m-%d %H:%M:%S')
+    end_date = DateTimeLocalField('End Time', validators=[InputRequired()], format='%Y-%m-%d %H:%M:%S')
     timezone = SelectField('Timezone', validators=[InputRequired()],
                                         choices=[('N/A', '-'), 
                                             ('Perth', '(UTC+8:00) Perth'), 

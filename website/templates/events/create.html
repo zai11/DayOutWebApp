@@ -63,26 +63,40 @@
                         {% endwith %}
                     </div>
                 </div>
+
+
+                <p class="lead text-left">Event date and time</p>
                 <div class="row">
-                    <p class="lead text-left">Event date and time</p>
+
                     <div class="col-sm-6">
-                        {{ wtf.form_field(form.start_date, class='form-control', placeholder='Start Date (dd-mm-yyyy)') }}
+                        <div class="form-floating">
+                        {% with field = form.start_date %}
+                            {{ field.label(class='control-label', style="padding-top: 16px; padding-left:1px;") }}
+                            {{ wtf.form_field(form.start_date, class='form-control', style="padding: 2rem .75rem 0.45rem 0.75rem;") }}  
+                        {% endwith %}
                     </div>
+                    </div>
+
                     <div class="col-sm-6">
-                        {{ wtf.form_field(form.end_date, class='form-control', placeholder='End Date (dd-mm-yyyy)') }}
+                        <div class="form-floating">
+                        {% with field = form.end_date %}
+                            {{ field.label(class='control-label', style="padding-top: 16px; padding-left:1px;") }}
+                            {{ wtf.form_field(form.end_date, class='form-control', style="padding: 2rem .75rem 0.45rem 0.75rem;") }}  
+                        {% endwith %}
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        {{ wtf.form_field(form.start_time, class='form-control', placeholder='Start Time (hh:mm)') }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ wtf.form_field(form.end_time, class='form-control', placeholder='End Time (hh:mm)') }}
-                    </div>
+
+
+
+
+                <div class="row">
                     <div class="form-floating col-sm-6">
                         {% with field = form.timezone %}
                             {{ field.label(class='control-label') }}
                             {{ field(class='form-select', placeholder='Timezone') }}
                         {% endwith %}
                     </div>
+
                 </div>
                 <div class="row">
                     <p class="lead text-left">Description</p>
