@@ -29,10 +29,10 @@ def show(id):
     error=None
     if form.validate_on_submit():      
       booking = Booking(tickets_booked=form.tickets_booked.data, user_id = form.user.data, event_id = form.event.data)
-      
-      result1 = db.session.execute("SELECT tickets_booked FROM events WHERE id = " + booking.event_id)
-      result2 = db.session.execute("SELECT ticket_capacity FROM events WHERE id = " + booking.event_id)     
-      allowed_tickets = result2.first()[0] - result1.first()[0]    
+
+      Event.query.filter_by(id=booking.event_id).first()
+
+      allowed_tickets = event.ticket_capacity  - event.tickets_booked    
       print(allowed_tickets)
       print(booking.tickets_booked)
 
