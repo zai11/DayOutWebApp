@@ -58,6 +58,7 @@ def register():
             new_user = User(name=uname, emailid=email, phone_number=phone, address=uaddress, password_hash=pwd_hash, is_admin=isadmin)
             db.session.add(new_user)
             db.session.commit()
+            login_user(new_user)
             #commit to the database and redirect to HTML page
             return redirect(url_for('main.index'))
     #the else is called when there is a get message
