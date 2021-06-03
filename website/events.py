@@ -24,26 +24,32 @@ def check_upload_file(form):
 
 @bp.route('/<id>', methods = ['GET', 'POST'])
 def show(id):
-    event = Event.query.filter_by(id=id).first()
-    form = BookingForm()   
-    error=None
-    if form.validate_on_submit():      
-      booking = Booking(tickets_booked=form.tickets_booked.data, user_id = form.user.data, event_id = form.event.data)
+  last_event = Event.query.order_by(Event.id.desc()).first()
+  print(str(last_event.id) + "BITCH")
+  if not id.isnumeric() or int(last_event.id) < int(id):
+    print("WOWOWOWOWOWOWWOOWWOOWOWOWOWOWOWOWOWOW")
+    return render_template('error404.html'), 404
 
-      Event.query.filter_by(id=booking.event_id).first()
+  event = Event.query.filter_by(id=id).first()
+  form = BookingForm()   
+  error=None
+  if form.validate_on_submit():      
+    booking = Booking(tickets_booked=form.tickets_booked.data, user_id = form.user.data, event_id = form.event.data)
 
-      allowed_tickets = event.ticket_capacity  - event.tickets_booked    
-      print(allowed_tickets)
-      print(booking.tickets_booked)
+    Event.query.filter_by(id=booking.event_id).first()
 
-      if booking.tickets_booked > allowed_tickets:
-        print("error to many tickets booked")
-        flash("Please reduce the number of tickets you would like to purchase")
-      else:
-        db.session.execute("UPDATE events SET tickets_booked = tickets_booked + " + str(booking.tickets_booked) + " WHERE id = " + booking.event_id)
-        db.session.add(booking)
-        db.session.commit()
-    return render_template('events/show.html', event = event, form=form)
+    allowed_tickets = event.ticket_capacity  - event.tickets_booked    
+    print(allowed_tickets)
+    print(booking.tickets_booked)
+
+    if booking.tickets_booked > allowed_tickets:
+      print("error to many tickets booked")
+      flash("Please reduce the number of tickets you would like to purchase")
+    else:
+      db.session.execute("UPDATE events SET tickets_booked = tickets_booked + " + str(booking.tickets_booked) + " WHERE id = " + booking.event_id)
+      db.session.add(booking)
+      db.session.commit()
+  return render_template('events/show.html', event = event, form=form)
 
 
 @bp.route('/create', methods = ['GET', 'POST'])
