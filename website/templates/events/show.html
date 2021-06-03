@@ -66,19 +66,35 @@
               <div class="modal-body">
                 <div class="row header">
 
+                
+
+                <div class="col-10">
+                  {{ wtf.form_field(form.tickets_booked, class='form-control', placeholder='Quantity') }}
                 </div>
 
-                <div class="col-sm-6">
-                 
-                  {{ wtf.form_field(form.tickets_booked, class='form-control', placeholder='Quantity') }}
-                  {{ wtf.form_field(form.event, class='form-control', value = event.id) }}
-                  {{ wtf.form_field(form.user, class='form-control', value = current_user.name) }}
+                <div class="col-2">
+                  {{ wtf.form_field(form.event, class='', value = event.id) }}
+                  {{ wtf.form_field(form.user, class='', value = current_user.name) }}
                 </div>
+              </div>
+                <div class="row">
+                  {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class='flashes'>
+                    {% for message in messages %}
+                      {{ message }}
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+              </div>
+                
                 
 
                 <div class="col-sm-6">
                   {{ wtf.form_field(form.submit, class='btn btn-primary btn-large text-center', disabled=false) }}
                 </div>
+              </div>
               </div>
             </div>
           </div>
