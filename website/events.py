@@ -56,9 +56,9 @@ def create():
     # if the form was successfully submitted
     # access the values in the form data
     start_date_time = datetime(form.start_date.data.year, form.start_date.data.month, form.start_date.data.day,
-                               form.start_time.data.hour, form.start_time.data.minute)
+                               form.start_date.data.hour, form.start_date.data.minute)
     end_date_time = datetime(form.end_date.data.year, form.end_date.data.month, form.end_date.data.day,
-                               form.end_time.data.hour, form.end_time.data.minute)
+                               form.end_date.data.hour, form.end_date.data.minute)
     event = Event(title=form.title.data, 
                 featured_headline=form.featured_headline.data,
                 description=form.description.data,
