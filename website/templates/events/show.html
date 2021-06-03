@@ -34,7 +34,7 @@
 
       <div class="d-grid gap-2">
         <button class="btn btn-outline-success btn-lg" type="button" disabled>{{event.status}}</button>
-        <button class="btn btn-outline-dark btn-lg" type="button" disabled>{{event.start_date}}</button>
+        <button class="btn btn-outline-dark btn-lg" type="button" disabled>{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</button>
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>${{event.price}}</button>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
