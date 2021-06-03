@@ -43,8 +43,8 @@ class EventForm(FlaskForm):
     venue = StringField('Venue', validators=[InputRequired()])
     category = SelectField('Category', validators=[InputRequired()],
                                         choices=[('N/A', '-'), ('Jazz', 'Jazz'), ('Country', 'Country'), ('Classical', 'Classical'), ('Hip-Hop', 'Hip-Hop'), ('Electronic', 'Electronic')])
-    start_date = DateTimeLocalField('Start Time', validators=[InputRequired()], format='%Y-%m-%d %H:%M:%S')
-    end_date = DateTimeLocalField('End Time', validators=[InputRequired()], format='%Y-%m-%d %H:%M:%S')
+    start_date = DateTimeLocalField('Start Time', validators=[InputRequired()], format='%Y-%m-%dT%H:%M')
+    end_date = DateTimeLocalField('End Time', validators=[InputRequired()], format='%Y-%m-%dT%H:%M')
     timezone = SelectField('Timezone', validators=[InputRequired()],
                                         choices=[('N/A', '-'), 
                                             ('Perth', '(UTC+8:00) Perth'), 
