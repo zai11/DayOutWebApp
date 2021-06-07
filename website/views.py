@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from .models import Event
+from .models import Event, Comment, User
 
 bp = Blueprint('main', __name__)
 
