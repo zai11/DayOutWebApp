@@ -2,12 +2,7 @@
 
 {% block title %}<title>Dayout - {{event.title}}</title>{% endblock %}
 {% import "bootstrap/wtf.html" as wtf %}
-<head>
-<script>
-  var myModal = new bootstrap.Modal(document.getElementById('myModal'), {})
-  myModal.toggle()
-</script>
-</head>
+
 {% block header %}
 <div class="container">
   <div class="col-md-1"></div>
@@ -75,14 +70,33 @@
 
       </div>
 
-
-
+      <script>
+        var formErrors = false;
+        $(document).ready(function() {
+          // If the flash message for too many tickets is shown
+          if ("{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}" != "") {
+          formErrors = true
+          } 
+          // If the integer validator message is shown
+          else if ("{% for field, errors in booking_form.errors.items() %}{{ ''.join(errors) }}{% endfor %}" != "") {
+            formErrors = true;
+          }
+          // Reopen the model if an error is seen
+          if (formErrors) {
+            $("#staticBackdrop").modal('show');
+          }
+        });
+      </script>
+      
       {% if current_user.is_authenticated %}
       <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
         {{booking_form.csrf_token() }}
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div>rerrere</div>
+
+          
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -105,14 +119,14 @@
               </div>
                 <div class="row">
                   {% with messages = get_flashed_messages() %}
-                  {% if messages %}
-                    <ul class='flashes'>
-                    {% for message in messages %}
-                      {{ message }}
-                    {% endfor %}
-                    </ul>
-                  {% endif %}
-                {% endwith %}
+                    {% if messages %}
+                      <ul class='flashes'>
+                      {% for message in messages %}
+                        {{ message }}
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                  {% endwith %}
               </div>
                 
                 
