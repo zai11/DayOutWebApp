@@ -27,7 +27,6 @@ def show(id):
   last_event = Event.query.order_by(Event.id.desc()).first()
   print(str(last_event.id) + "BITCH")
   if not id.isnumeric() or int(last_event.id) < int(id):
-    print("WOWOWOWOWOWOWWOOWWOOWOWOWOWOWOWOWOWOW")
     return render_template('error404.html'), 404
 
   event = Event.query.filter_by(id=id).first()
