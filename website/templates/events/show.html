@@ -72,13 +72,37 @@
 
       <script>
         var formErrors = false;
+
+        //this checks what button was last pressed to know whether or not to show the booking modal on refresh. It's stored in session storage.
+        //-------------------------------------------------------------------------------------------------------
+        function lastButtonComment(){
+          if (typeof(Storage) !== "undefined") {
+            // Store
+            sessionStorage.setItem("last_button", "comment");
+          } else {
+            alert("Sorry, your browser does not support web storage. Please switch browsers.");
+          }
+        }
+        function lastButtonBooking(){
+          if (typeof(Storage) !== "undefined") {
+            // Store
+            sessionStorage.setItem("last_button", "booking");
+          } else {
+            alert("Sorry, your browser does not support web storage. Please switch browsers.");
+          }
+        }
+        //-------------------------------------------------------------------------------------------------------
+
+
+
+        //on page load
         $(document).ready(function() {
           // If the flash message for too many tickets is shown
-          if ("{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}" != "") {
+          if (sessionStorage.getItem("last_button") == "booking" && "{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}" != "") {
           formErrors = true
           } 
           // If the integer validator message is shown
-          else if ("{% for field, errors in booking_form.errors.items() %}{{ ''.join(errors) }}{% endfor %}" != "") {
+          else if (sessionStorage.getItem("last_button") == "booking" && "{% for field, errors in booking_form.errors.items() %}{{ ''.join(errors) }}{% endfor %}" != "") {
             formErrors = true;
           }
           // Reopen the model if an error is seen
@@ -87,9 +111,9 @@
           }
         });
       </script>
-      
+
       {% if current_user.is_authenticated %}
-      <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
+      <form action="" id="booking_form" method="post" class="form" role="form" enctype="multipart/form-data">
         {{booking_form.csrf_token() }}
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -132,7 +156,7 @@
                 
 
                 <div class="col-sm-6">
-                  {{ wtf.form_field(booking_form.submit, class='btn btn-primary btn-large text-center', disabled=false) }}
+                  {{ wtf.form_field(booking_form.submit, onclick="lastButtonBooking()", id='booking_form_submit', class='btn btn-primary btn-large text-center', disabled=false) }}
                 </div>
               </div>
               </div>
@@ -185,10 +209,10 @@
       div .control-label{display: none;}
     </style>
     <div class="col-md-9">
-      <form action="" method="POST" class="form" enctype="multipart/form-data">
+      <form id="comment_form" action="" method="POST" class="form" enctype="multipart/form-data">
         {{ comment_form.csrf_token() }}
         {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment') }}
-        {{ wtf.form_field(comment_form.submit, class='btn btn-primary btn-large text-center', disabled=false, autocomplete=off) }}
+        {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn btn-primary btn-large text-center', disabled=false, autocomplete=off) }}
       </form>
     </div>
     <div class="col-md-3"></div>
@@ -196,57 +220,5 @@
 
 </div>
 
-<!--------------------------------- Modal START ---------------------------------------->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Register an account</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail3">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail3">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword3">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Confirm</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword3">
-            </div>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-              I agree to get emails on new listed events on Dayone
-            </label>
-
-            <p><em>By continuing, you agree to our User Agreement and Privacy Policy.</em></p>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="history.html" class="btn btn-primary">Register</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!----------------- Modal END ------------------------->
 
 {% endblock %}
