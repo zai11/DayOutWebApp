@@ -33,8 +33,8 @@
                   <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
                       <div class="container-fluid">
-                        <form class="d-flex">
-                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="d-flex" action="{{url_for('main.search')}}" >
+                          <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
                           <button class="btn btn-primary" type="submit">Search</button>
                         </form>
                       </div>

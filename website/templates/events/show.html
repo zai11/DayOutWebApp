@@ -79,7 +79,7 @@
 
       {% if current_user.is_authenticated %}
       <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
-        {{ form.csrf_token() }}
+        {{booking_form.csrf_token() }}
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -95,12 +95,12 @@
                 
 
                 <div class="col-10">
-                  {{ wtf.form_field(form.tickets_booked, class='form-control', placeholder='Quantity') }}
+                  {{ wtf.form_field(booking_form.tickets_booked, class='form-control', placeholder='Quantity') }}
                 </div>
 
                 <div class="col-2">
-                  {{ wtf.form_field(form.event, class='', value = event.id) }}
-                  {{ wtf.form_field(form.user, class='', value = current_user.name) }}
+                  {{ wtf.form_field(booking_form.event, class='', value = event.id) }}
+                  {{ wtf.form_field(booking_form.user, class='', value = current_user.name) }}
                 </div>
               </div>
                 <div class="row">
@@ -118,7 +118,7 @@
                 
 
                 <div class="col-sm-6">
-                  {{ wtf.form_field(form.submit, class='btn btn-primary btn-large text-center', disabled=false) }}
+                  {{ wtf.form_field(booking_form.submit, class='btn btn-primary btn-large text-center', disabled=false) }}
                 </div>
               </div>
               </div>
@@ -145,57 +145,37 @@
           </div>
         </div>
         {% endif %}
-
+      </form>
     </div>
     <p class="lead text-left">Reviews</p>
 
     <div class="col-md-9">
-
+      {% for i in range(comments|length) %}
       <div class="card mb-3" style="max-width: 100%;">
         <div class="row g-0 d-flex flex-wrap align-items-center">
           <div class="col-md-10">
             <div class="card-body">
-              <h5 class="card-title">Neil Woodwards</h5>
-              <p class="card-text">Nullam tellus magna, lobortis a felis id, auctor aliquet justo. Aliquam erat
-                volutpat. Vivamus auctor lectus sed sem tincidunt egestas. Cras non odio laoreet, egestas augue nec,
-                rhoncus justo. Nunc nec aliquet tellus.</p>
-              <p class="card-text"><small class="text-muted">Posted 3 mins ago</small></p>
+              <h5 class="card-title"><!--Neil Woodwards--> {{comments[i][1].name}}</h5>
+              <p class="card-text">{{comments[i][0].text}}</p>
+              <p class="card-text"><small class="text-muted">Posted on: {{comments[i][0].created_at.strftime("%d %b %Y %I:%M %p")}}</small></p>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
+    </div>
 
+    <p class="lead text-left">Leave a comment</p>
 
-      <p class="lead text-left">Leave a comment</p>
-
-      <form>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingInput" placeholder="John">
-              <label for="floatingInput">First Name</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingInput" placeholder="Smith">
-              <label for="floatingInput">Last Name</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-              <label for="floatingInput">Email</label>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-floating mb-3">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-                style="height: 150px"></textarea>
-              <label for="floatingInput">Leave your comment here</label>
-            </div>
-            <button type="submit" class="btn btn-primary mb-3">Submit</button>
-          </div>
-        </div>
+    <style>
+      div .control-label{display: none;}
+    </style>
+    <div class="col-md-9">
+      <form action="" method="POST" class="form" enctype="multipart/form-data">
+        {{ comment_form.csrf_token() }}
+        {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment') }}
+        {{ wtf.form_field(comment_form.submit, class='btn btn-primary btn-large text-center', disabled=false, autocomplete=off) }}
       </form>
-
-
     </div>
     <div class="col-md-3"></div>
   </div>
