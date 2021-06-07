@@ -59,8 +59,15 @@
   <div class="tab-pane fade show active" id="pills-jazz" role="tabpanel" aria-labelledby="pills-home-tab">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-4">
       <!------------------------------ CARD ITEM ------------------------------------------>
+      {% set jazzExists = [ False ] %}
+      {% set countryExists = [ False ] %}
+      {% set classicalExists = [ False ] %}
+      {% set hiphopExists = [ False ] %}
+      {% set electronicExists = [ False ] %}
       {% for event in events %}
       {% if event.category == "Jazz" %}
+        {% if jazzExists.pop() %} {% endif %}
+        {% if jazzExists.append(True) %}{% endif %}
       <div class="col">
         <div class="card shadow-sm" >
           <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
@@ -93,7 +100,11 @@
       </div>
       {% endif %}
       {% endfor %}
-
+      {% if not jazzExists[0] %}
+        <div class="row" style="height:484px;padding-top: 16px">
+          <p>There are no events in this category yet.</p>
+        </div>
+      {% endif %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
@@ -103,6 +114,8 @@
       <!------------------------------ CARD ITEM ------------------------------------------>
       {% for event in events %}
       {% if event.category == "Country" %}
+        {% if countryExists.pop() %} {% endif %}
+        {% if countryExists.append(True) %}{% endif %}
       <div class="col">
         <div class="card shadow-sm" >
           <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
@@ -135,6 +148,11 @@
       </div>
       {% endif %}
       {% endfor %}
+      {% if not countryExists[0] %}
+        <div class="row" style="height:484px;padding-top: 16px">
+          <p>There are no events in this category yet.</p>
+        </div>
+      {% endif %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
@@ -144,6 +162,8 @@
       <!------------------------------ CARD ITEM ------------------------------------------>
       {% for event in events %}
       {% if event.category == "Classical" %}
+        {% if classicalExists.pop() %} {% endif %}
+        {% if classicalExists.append(True) %}{% endif %}
       <div class="col">
         <div class="card shadow-sm" >
           <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
@@ -176,6 +196,11 @@
       </div>
       {% endif %}
       {% endfor %}
+      {% if not classicalExists[0] %}
+        <div class="row" style="height:484px;padding-top: 16px">
+          <p>There are no events in this category yet.</p>
+        </div>
+      {% endif %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
@@ -185,6 +210,8 @@
       <!------------------------------ CARD ITEM ------------------------------------------>
       {% for event in events %}
       {% if event.category == "Hip-Hop" %}
+        {% if hiphopExists.pop() %} {% endif %}
+        {% if hiphopExists.append(True) %}{% endif %}
       <div class="col">
         <div class="card shadow-sm" >
           <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
@@ -217,6 +244,11 @@
       </div>
       {% endif %}
       {% endfor %}
+      {% if not hiphopExists[0] %}
+        <div class="row" style="height:484px;padding-top: 16px">
+          <p>There are no events in this category yet.</p>
+        </div>
+      {% endif %}
       <!------------------------------ END CATEGORY ------------------------------------------>  
     </div>
   </div>
@@ -226,6 +258,8 @@
       <!------------------------------ CARD ITEM ------------------------------------------>
       {% for event in events %}
       {% if event.category == "Electronic" %}
+        {% if electronicExists.pop() %} {% endif %}
+        {% if electronicExists.append(True) %}{% endif %}
       <div class="col">
         <div class="card shadow-sm" >
           <img class="card-img-top" src="{{event.image}}" alt="Card image cap">
@@ -258,7 +292,12 @@
       </div>
       {% endif %}
       {% endfor %}
-      <!------------------------------ END CATEGORY ------------------------------------------>  
+      {% if not electronicExists[0] %}
+        <div class="row" style="height:484px;padding-top: 16px">
+          <p>There are no events in this category yet.</p>
+        </div>
+      {% endif %}
+      <!------------------------------ END CATEGORY ------------------------------------------> 
     </div>
   </div>
 </div>
