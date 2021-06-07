@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from .models import Event, Comment, User
+from flask import Blueprint, render_template
+from .models import Event
 
 bp = Blueprint('main', __name__)
 
@@ -12,13 +12,3 @@ def index():
 @bp.route('/event')
 def show():
     return render_template('events/show.html')
-
-@bp.route('/search')
-def search():
-    #get the search string from request
-    if request.args['search']:
-        evnt = "%" + request.args['search'] + '%'
-        events = Event.query.filter(Event.title.like(evnt)).all()
-        return render_template('index.html', events=events)
-    else:
-        return redirect(url_for('main.index'))

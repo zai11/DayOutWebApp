@@ -1,7 +1,8 @@
 import re
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Booking, Event, Comment, User
-from .forms import CommentForm, EventForm, BookingForm
+from .models import Booking, Event, Comment
+from .forms import EventForm
+from .forms import BookingForm
 from . import db
 from werkzeug.utils import secure_filename
 import os
@@ -24,14 +25,15 @@ def check_upload_file(form):
 @bp.route('/<id>', methods = ['GET', 'POST'])
 def show(id):
   last_event = Event.query.order_by(Event.id.desc()).first()
+  print(str(last_event.id) + "BITCH")
   if not id.isnumeric() or int(last_event.id) < int(id):
     return render_template('error404.html'), 404
 
   event = Event.query.filter_by(id=id).first()
-  booking_form = BookingForm()   
+  form = BookingForm()   
   error=None
-  if booking_form.validate_on_submit():      
-    booking = Booking(tickets_booked=booking_form.tickets_booked.data, user_id = booking_form.user.data, event_id = booking_form.event.data)
+  if form.validate_on_submit():      
+    booking = Booking(tickets_booked=form.tickets_booked.data, user_id = form.user.data, event_id = form.event.data)
 
     Event.query.filter_by(id=booking.event_id).first()
 
@@ -46,22 +48,7 @@ def show(id):
       db.session.execute("UPDATE events SET tickets_booked = tickets_booked + " + str(booking.tickets_booked) + " WHERE id = " + booking.event_id)
       db.session.add(booking)
       db.session.commit()
-
-  comment_form = CommentForm()
-  if comment_form.validate_on_submit():
-    print("Called")
-    comment = Comment(text=comment_form.text.data, user_id=current_user.get_id(), event_id=id)
-    db.session.add(comment)
-    db.session.commit()
-    
-  comments=[]
-  for comment in Comment.query.all():
-    for user in User.query.all():
-      print(type(id))
-      if (comment.user_id == user.id) and (comment.event_id == int(id)):
-        comments.append([comment, user])
-      
-  return render_template('events/show.html', event = event, booking_form=booking_form, comments=comments, comment_form=comment_form)
+  return render_template('events/show.html', event = event, form=form)
 
 
 @bp.route('/create', methods = ['GET', 'POST'])
