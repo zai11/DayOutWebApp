@@ -33,12 +33,17 @@ def show(id):
   if booking_form.validate_on_submit():      
     booking = Booking(tickets_booked=booking_form.tickets_booked.data, user_id = booking_form.user.data, event_id = booking_form.event.data)
 
-    Event.query.filter_by(id=booking.event_id).first()
+    Event.query.filter_by(id=booking.event_id).first()  
 
-    allowed_tickets = event.ticket_capacity  - event.tickets_booked    
+    allowed_tickets = event.ticket_capacity  - event.tickets_booked        
     print(allowed_tickets)
     print(booking.tickets_booked)
-
+    if booking.tickets_booked == allowed_tickets:
+      print("error123")
+      event.status = "Booked"
+    else:
+      event.status = event.status
+      
     if booking.tickets_booked > allowed_tickets:
       print("error to many tickets booked")
       flash("Please reduce the number of tickets you would like to purchase")
