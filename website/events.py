@@ -141,4 +141,4 @@ def update(id):
     form.timezone.data = eventupdate.timezone
     form.quantity.data = eventupdate.ticket_capacity
     form.price.data = eventupdate.price
-  return render_template('events/update.html', form=form, current_time=datetime.now())
+  return render_template('events/update.html', form=form, current_time=datetime.now(), end_time=eventupdate.end_date, start_time=eventupdate.start_date)
