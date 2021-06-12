@@ -49,19 +49,20 @@
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>Tickets Remaining: <br> {{event.ticket_capacity-event.tickets_booked}}</button>
         <!-- Button trigger modal -->
 
-        
-        <!-- 
-          If a user is logged in, the button acts as a model for booking
-          If an admin is logged in, the button is disabled.
-          If the user is not logged in, the button is disabled and says "Login to Book"
-         -->
-        <button type="button" class="btn btn-primary btn-lg" 
-        {% if current_user.is_authenticated and not current_user.is_admin %} 
-        data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book event
-        {% elif not current_user.is_authenticated%}
-        disabled>Login to Book
-        {% else %}
-        disabled>Book event
+        {% if event.ticket_capacity-event.tickets_booked > 0 %}
+          <!-- 
+            If a user is logged in, the button acts as a model for booking
+            If an admin is logged in, the button is disabled.
+            If the user is not logged in, the button is disabled and says "Login to Book"
+          -->
+          <button type="button" class="btn btn-primary btn-lg" 
+          {% if current_user.is_authenticated and not current_user.is_admin %} 
+            data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book event
+          {% elif not current_user.is_authenticated%}
+            disabled>Login to Book
+          {% else %}
+            disabled>Book event
+          {% endif %}
         {% endif %}
         </button>
 
