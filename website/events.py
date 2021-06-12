@@ -36,16 +36,16 @@ def show(id):
     Event.query.filter_by(id=booking.event_id).first()  
 
     allowed_tickets = event.ticket_capacity  - event.tickets_booked        
-    print(allowed_tickets)
-    print(booking.tickets_booked)
+    #print(allowed_tickets)
+    #print(booking.tickets_booked)
     if booking.tickets_booked == allowed_tickets:
-      print("error123")
+      #print("error123")
       event.status = "Booked"
     else:
       event.status = event.status
       
     if booking.tickets_booked > allowed_tickets:
-      print("error to many tickets booked")
+      #print("error to many tickets booked")
       flash("Please reduce the number of tickets you would like to purchase")
     else:
       db.session.execute("UPDATE events SET tickets_booked = tickets_booked + " + str(booking.tickets_booked) + " WHERE id = " + booking.event_id)
@@ -54,7 +54,7 @@ def show(id):
 
   comment_form = CommentForm()
   if comment_form.validate_on_submit():
-    print("Called")
+    #print("Called")
     comment = Comment(text=comment_form.text.data, user_id=current_user.get_id(), event_id=id)
     db.session.add(comment)
     db.session.commit()
@@ -62,7 +62,7 @@ def show(id):
   comments=[]
   for comment in Comment.query.all():
     for user in User.query.all():
-      print(type(id))
+      #print(type(id))
       if (comment.user_id == user.id) and (comment.event_id == int(id)):
         comments.append([comment, user])
       
@@ -72,7 +72,7 @@ def show(id):
 @bp.route('/create', methods = ['GET', 'POST'])
 #@login_required
 def create():
-  print('Method type: ', request.method)
+  #print('Method type: ', request.method)
   form = EventForm()
   if form.validate_on_submit():
     db_file_path = check_upload_file(form)
@@ -99,4 +99,46 @@ def create():
     # commit to the database
     db.session.commit()
     return redirect(url_for('main.index'))
-  return render_template('events/create.html', form=form)
+  return render_template('events/create.html', form=form, current_time=datetime.now())
+
+@bp.route('/<id>/update', methods = ['GET', 'POST'])
+#@login_required
+def update(id):
+  #print('Method type: ', request.method)
+  eventupdate = Event.query.get_or_404(id)
+  form = EventForm()
+  if form.validate_on_submit():
+    db_file_path = check_upload_file(form)
+    start_date_time = datetime(form.start_date.data.year, form.start_date.data.month, form.start_date.data.day,
+                               form.start_date.data.hour, form.start_date.data.minute)
+    end_date_time = datetime(form.end_date.data.year, form.end_date.data.month, form.end_date.data.day,
+                               form.end_date.data.hour, form.end_date.data.minute)
+    eventupdate.title = form.title.data
+    eventupdate.featured_headline = form.featured_headline.data
+    eventupdate.description = form.description.data
+    eventupdate.status = form.status.data
+    eventupdate.image = db_file_path
+    eventupdate.category = form.category.data
+    eventupdate.location = form.venue.data
+    eventupdate.start_date = start_date_time
+    eventupdate.end_date = end_date_time
+    eventupdate.timezone = form.timezone.data
+    eventupdate.ticket_capacity = form.quantity.data
+    eventupdate.price = form.price.data
+    db.session.commit()
+    flash('Your post has been updated!', 'success')
+    return redirect(url_for('main.index'))
+  elif request.method == 'GET':
+    form.title.data = eventupdate.title
+    form.featured_headline.data = eventupdate.featured_headline
+    form.description.data = eventupdate.description
+    form.status.data = eventupdate.status
+    db_file_path = eventupdate.image
+    form.category.data = eventupdate.category
+    form.venue.data = eventupdate.location
+    start_date_time = eventupdate.start_date
+    end_date_time = eventupdate.end_date
+    form.timezone.data = eventupdate.timezone
+    form.quantity.data = eventupdate.ticket_capacity
+    form.price.data = eventupdate.price
+  return render_template('events/update.html', form=form, current_time=datetime.now())
