@@ -80,7 +80,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</li>
             <li class="list-group-item">{{event.location}}</li>
-            <li class="list-group-item">{{event.timezone}}</li>
+            <li class="list-group-item">Tickets from: ${{event.price}}</li>
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
@@ -128,7 +128,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</li>
             <li class="list-group-item">{{event.location}}</li>
-            <li class="list-group-item">{{event.timezone}}</li>
+            <li class="list-group-item">Tickets from: ${{event.price}}</li>
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
@@ -176,7 +176,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</li>
             <li class="list-group-item">{{event.location}}</li>
-            <li class="list-group-item">{{event.timezone}}</li>
+            <li class="list-group-item">Tickets from: ${{event.price}}</li>
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
@@ -224,7 +224,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</li>
             <li class="list-group-item">{{event.location}}</li>
-            <li class="list-group-item">{{event.timezone}}</li>
+            <li class="list-group-item">Tickets from: ${{event.price}}</li>
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
@@ -272,7 +272,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</li>
             <li class="list-group-item">{{event.location}}</li>
-            <li class="list-group-item">{{event.timezone}}</li>
+            <li class="list-group-item">Tickets from: ${{event.price}}</li>
           </ul>
           <div class="card-body">
             <a href="{{url_for('event.show', id=event.id)}}" class="btn btn-primary btn-sm">View details</a>
