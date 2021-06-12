@@ -72,7 +72,7 @@
                         <div class="form-floating">
                         {% with field = form.start_date %}
                             {{ field.label(class='control-label', style="padding-top: 16px; padding-left:1px;") }}
-                            {{ wtf.form_field(form.start_date, class='form-control', style="padding: 2rem .75rem 0.45rem 0.75rem;") }}  
+                            {{ wtf.form_field(form.start_date, class='form-control', value=current_time.strftime("%Y-%m-%dT%H:%M"), style="padding: 2rem .75rem 0.45rem 0.75rem;") }}  
                         {% endwith %}
                     </div>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="form-floating">
                         {% with field = form.end_date %}
                             {{ field.label(class='control-label', style="padding-top: 16px; padding-left:1px;") }}
-                            {{ wtf.form_field(form.end_date, class='form-control', style="padding: 2rem .75rem 0.45rem 0.75rem;") }}  
+                            {{ wtf.form_field(form.end_date, class='form-control', value=current_time.strftime("%Y-%m-%dT%H:%M"), style="padding: 2rem .75rem 0.45rem 0.75rem;") }}  
                         {% endwith %}
                         </div>
                     </div>

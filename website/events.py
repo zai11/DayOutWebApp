@@ -99,4 +99,4 @@ def create():
     # commit to the database
     db.session.commit()
     return redirect(url_for('main.index'))
-  return render_template('events/create.html', form=form)
+  return render_template('events/create.html', form=form, current_time=datetime.now())
