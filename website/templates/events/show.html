@@ -203,17 +203,32 @@
       {% endfor %}
     </div>
 
-    <p class="lead text-left">Leave a comment</p>
+    
 
     <style>
       div .control-label{display: none;}
     </style>
     <div class="col-md-9">
+      {% if current_user.is_authenticated and not current_user.is_admin%} 
+      <p class="lead text-left">Leave a comment</p>
       <form id="comment_form" action="" method="POST" class="form" enctype="multipart/form-data">
         {{ comment_form.csrf_token() }}
-        {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment') }}
-        {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn btn-primary btn-large text-center', disabled=false, autocomplete=off) }}
+        {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment')}}
+        {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn btn-primary btn-large text-center')}}
       </form>
+      {% elif current_user.is_authenticated and current_user.is_admin %}
+      <p class="lead text-left">Leave a comment</p>
+      <form id="comment_form" action="" method="POST" class="form" enctype="multipart/form-data">
+        {{ comment_form.csrf_token() }}
+        {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment', disabled=true)}}
+        {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn btn-primary btn-large text-center', disabled=true)}}
+      </form>
+      {% else %}
+        <p class="lead text-left">Login as a user to comment</p>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg">Login</a>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">Register</a>
+
+      {% endif %}
     </div>
     <div class="col-md-3"></div>
   </div>
