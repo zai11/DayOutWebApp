@@ -99,6 +99,7 @@ def create():
     # commit to the database
     db.session.commit()
     return redirect(url_for('main.index'))
+<<<<<<< HEAD
   return render_template('events/create.html', form=form, current_time=datetime.now())
 
 @bp.route('/<id>/update', methods = ['GET', 'POST'])
@@ -142,3 +143,6 @@ def update(id):
     form.quantity.data = eventupdate.ticket_capacity
     form.price.data = eventupdate.price
   return render_template('events/update.html', form=form, current_time=datetime.now())
+=======
+  return render_template('events/create.html', form=form, current_time=datetime.now())
+>>>>>>> 1a18d6b3fc2492aee73b5de52771c9f448f07ff8
