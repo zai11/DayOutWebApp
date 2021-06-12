@@ -33,7 +33,17 @@
     <div class="col-md-3 float-right">
 
       <div class="d-grid gap-2">
-        <button class="btn btn-outline-success btn-lg" type="button" disabled>{{event.status}}</button>
+        <button class="btn class='btn
+            {% if event.status == "Upcoming" %}
+            btn-outline-success
+            {% elif event.status == "Inactive" %}
+            btn-outline-warning
+            {% elif event.status == "Booked" %}
+            btn-outline-info
+            {% elif event.status == "Cancelled" %}
+            btn-outline-danger
+            {% endif %}
+            btn-lg" type="button" disabled>{{event.status}}</button>
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</button>
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>${{event.price}}</button>
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>Tickets Remaining: <br> {{event.ticket_capacity-event.tickets_booked}}</button>
