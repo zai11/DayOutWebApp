@@ -47,10 +47,10 @@ class EventForm(FlaskForm):
     end_date = DateTimeLocalField('End Time', validators=[InputRequired()], format='%Y-%m-%dT%H:%M')
     timezone = SelectField('Timezone', validators=[InputRequired()],
                                         choices=[('N/A', '-'), 
-                                            ('Perth', '(UTC+8:00) Perth'), 
-                                            ('Adelaide, Darwin', '(UTC+9:30) Adelaide, Darwin'), 
-                                            ('Brisbane', '(UTC+10:00) Brisbane'),
-                                            ('Hobart, Canberra, Melbourne, Sydney', '(UTC+10:00) Hobart, Canberra, Melbourne, Sydney')])
+                                            ('(UTC+8:00)', '(UTC+8:00) Perth'), 
+                                            ('(UTC+9:30)', '(UTC+9:30) Adelaide, Darwin'), 
+                                            ('(UTC+9:30)', '(UTC+10:00) Brisbane'),
+                                            ('(UTC+10:00)', '(UTC+10:00) Hobart, Canberra, Melbourne, Sydney')])
     description = TextAreaField('Description', validators=[InputRequired()])
     featured_headline = TextAreaField('Featured Headline', validators=[InputRequired()])
     price = DecimalField('Price (AUD)', validators=[InputRequired(), NumberRange(min=0, message="Please enter a valid price")])
