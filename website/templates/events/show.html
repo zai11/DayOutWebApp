@@ -44,7 +44,7 @@
             btn-outline-danger
             {% endif %}
             btn-lg" type="button" disabled>{{event.status}}</button>
-        <button class="btn btn-outline-dark btn-lg" type="button" disabled>{{event.start_date.strftime("%A, %d. %B %Y, %I:%M%p")}}</button>
+        <button class="btn btn-outline-dark btn-lg" type="button" disabled>Start: {{event.start_date.strftime("%d %B %Y, %I:%M%p")}}<br>End: {{event.end_date.strftime("%d %B %Y, %I:%M%p")}}</button>
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>${{event.price}}</button>
         <button class="btn btn-outline-dark btn-lg" type="button" disabled>Tickets Remaining: <br> {{event.ticket_capacity-event.tickets_booked}}</button>
         <!-- Button trigger modal -->
