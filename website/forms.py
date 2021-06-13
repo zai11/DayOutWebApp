@@ -39,7 +39,7 @@ class EventForm(FlaskForm):
     image = FileField('Image Header', validators=[FileRequired(message='Image can not be empty'),
                                         FileAllowed(ALLOWED_FILE, message='Only support png, jpg, JPG, PNG, bmp')])
     title = StringField('Title', validators=[InputRequired()])
-    host = StringField('Host', validators=[InputRequired()])
+    host = HiddenField('')
     venue = StringField('Venue', validators=[InputRequired()])
     category = SelectField('Category', validators=[InputRequired()],
                                         choices=[('N/A', '-'), ('Jazz', 'Jazz'), ('Country', 'Country'), ('Classical', 'Classical'), ('Hip-Hop', 'Hip-Hop'), ('Electronic', 'Electronic')])
