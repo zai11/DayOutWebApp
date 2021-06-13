@@ -52,6 +52,7 @@
                     </div>
                     <div class="col-sm-6">
                         {{ wtf.form_field(form.venue, class='form-control', placeholder='Venue') }}
+                        {{ wtf.form_field(form.host, class='form-control', placeholder='host') }}
                     </div>
                     <div class="col-sm-6">
                         {% with field = form.category %}
