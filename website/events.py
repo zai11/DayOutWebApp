@@ -133,7 +133,6 @@ def update(id):
     form.featured_headline.data = eventupdate.featured_headline
     form.description.data = eventupdate.description
     form.status.data = eventupdate.status
-    db_file_path = eventupdate.image
     form.category.data = eventupdate.category
     form.venue.data = eventupdate.location
     start_date_time = eventupdate.start_date
@@ -142,3 +141,18 @@ def update(id):
     form.quantity.data = eventupdate.ticket_capacity
     form.price.data = eventupdate.price
   return render_template('events/update.html', form=form, current_time=datetime.now(), end_time=eventupdate.end_date, start_time=eventupdate.start_date)
+
+
+@bp.route('/<id>/delete', methods = ['GET', 'POST'])
+#@login_required
+def delete(id):
+  eventdelete = Event.query.get_or_404(id)
+  try:
+    db.session.delete(eventdelete)
+    db.session.commit()
+    flash('User deleted!', 'success')
+    return redirect(url_for('main.index'))
+  except:
+    flash('Something didnt work', 'success')
+    return redirect(url_for('main.index'))
+  
