@@ -47,7 +47,9 @@
                   </ul>
                   <div class="d-grid gap-2 d-md-block">
                   {% if current_user.is_authenticated %} 
-
+                  {% if not current_user.is_admin %} 
+                  <a href="{{ url_for('main.bookings') }}" class="btn btn-outline-light btn-sm" disabled>Booking History</a>
+                  {% endif %}
                   <a href="#" class="btn btn-outline-light btn-sm" disabled>
                     <!-- Display megaphone icon when admin -->
                     {% if current_user.is_authenticated and current_user.is_admin %} 

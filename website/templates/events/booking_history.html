@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Dayout</title>{% endblock %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block header %}
+
+{% if current_user.is_authenticated and current_user.is_admin %} 
+<div class="container">
+    
+  
+    <h1 class="display-4 text-white">Wrong User!</h1>
+    <p class="lead text-white">You must be a user, not an admin to view booking history!</p>
+  
+    {% else %} 
+  
+    <h1 class="display-4 text-white">Bookings</h1>
+    <p class="lead text-white">Welcome {{current_user.name}}, to your booking history. Everything you have booked can be found below.</p>
+  
+    {% endif %}
+  </div>
+</div>
+</div>
+</div>
+</div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+{% if current_user.is_authenticated and not current_user.is_admin %} 
+        <div class="container">
+        <table class="table table-sm table-dark">
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Event</th>
+                  <th>Tickets</th>
+                  <th>Time Booked</th>
+                  <th>Order ID</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if bookings %}
+                    {% for booking in bookings %}
+                        <tr>
+                            {% for event in events %}
+                                {% if event.id == booking.event_id %}
+                                <td><img src="{{event.image}}" alt="Card image cap"width="140" height="63"></td>
+                                <td>{{event.title}}</td>
+                                <td>{{booking.tickets_booked}}</td>
+                                <td>{{booking.created_at.strftime("%d %b %Y %I:%M %p")}}</td>
+                                <td>{{booking.id}}</td>
+                                <td><a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-primary btn-sm">View</a></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </table>
+{% endif %}    
+
+      </div>
+
+</div>
+
+
+{% endblock %}
