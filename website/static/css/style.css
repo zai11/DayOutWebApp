@@ -171,3 +171,15 @@ nav-link {
 .footerhead {
   color: #ffffff;
 }
+
+.alert-success {
+  background-color: #238636;
+  border-color: #2ea043;
+  color: #ffffff;
+}
+
+.alert-danger {
+  background-color: #cf3c2a;
+  border-color: #e1574a;
+  color: #ffffff;
+}
