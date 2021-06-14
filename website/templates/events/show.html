@@ -204,7 +204,7 @@
         //on page load
         $(document).ready(function () {
           // If the flash message for too many tickets is shown
-          if (sessionStorage.getItem("last_button") == "booking" && "{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}" != "") {
+          if (sessionStorage.getItem("last_button") == "booking" && "{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}" != "" && "{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}"  != "Your booking has been submitted!") {
             formErrors = true
           } 
 
@@ -214,7 +214,7 @@
           // } 
 
           // If the integer validator message is shown
-          else if (sessionStorage.getItem("last_button") == "booking" && "{% for field, errors in booking_form.errors.items() %}{{ ''.join(errors) }}{% endfor %}" != "") {
+          else if (sessionStorage.getItem("last_button") == "booking" && "{% for field, errors in booking_form.errors.items() %}{{ ''.join(errors) }}{% endfor %}" != "" && "{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}"  != "Your booking has been submitted!") {
             formErrors = true;
           }
           // Reopen the model if an error is seen
