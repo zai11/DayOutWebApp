@@ -245,7 +245,6 @@
 
 
 
-<<<<<<< HEAD
                   <div class="col-10">
                     {{ wtf.form_field(booking_form.tickets_booked, class='form-control', placeholder='Quantity') }}
                   </div>
@@ -254,11 +253,9 @@
                     {{ wtf.form_field(booking_form.event, class='', value = event.id) }}
                     {{ wtf.form_field(booking_form.user, class='', value = current_user.name) }}
                   </div>
-=======
                 <div class="col-2">
                   {{ wtf.form_field(booking_form.event, class='', value = event.id) }}
                   {{ wtf.form_field(booking_form.user, class='', value = current_user.id) }}
->>>>>>> 08d0419bb98c3098cc523670e9cb0e8141d5f601
                 </div>
                 <div class="row">
                   {% with messages = get_flashed_messages() %}
