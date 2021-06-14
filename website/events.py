@@ -1,7 +1,7 @@
 import re
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Booking, Event, Comment, User
-from .forms import CommentForm, EventForm, BookingForm
+from .forms import CommentForm, EventForm, UpdateEventForm, BookingForm
 from . import db
 from werkzeug.utils import secure_filename
 import os
@@ -20,6 +20,11 @@ def check_upload_file(form):
     fp.save(upload_path)
     return dp_upload_path
 
+#for removing the static/image prefix on the update events
+def remove_prefix(text, prefix):
+  if text.startswith(prefix):
+      return text[len(prefix):]
+  return text
 
 @bp.route('/<id>', methods = ['GET', 'POST'])
 def show(id):
@@ -107,9 +112,11 @@ def create():
 def update(id):
   #print('Method type: ', request.method)
   eventupdate = Event.query.get_or_404(id)
-  form = EventForm()
+  form = UpdateEventForm()
   if form.validate_on_submit():
-    db_file_path = check_upload_file(form)
+    if form.image.data != None:
+      db_file_path = check_upload_file(form)
+
     start_date_time = datetime(form.start_date.data.year, form.start_date.data.month, form.start_date.data.day,
                                form.start_date.data.hour, form.start_date.data.minute)
     end_date_time = datetime(form.end_date.data.year, form.end_date.data.month, form.end_date.data.day,
@@ -118,7 +125,8 @@ def update(id):
     eventupdate.featured_headline = form.featured_headline.data
     eventupdate.description = form.description.data
     eventupdate.status = form.status.data
-    eventupdate.image = db_file_path
+    if form.image.data != None:
+      eventupdate.image = db_file_path
     eventupdate.category = form.category.data
     eventupdate.location = form.venue.data
     eventupdate.start_date = start_date_time
@@ -141,7 +149,8 @@ def update(id):
     form.timezone.data = eventupdate.timezone
     form.quantity.data = eventupdate.ticket_capacity
     form.price.data = eventupdate.price
-  return render_template('events/update.html', form=form, current_time=datetime.now(), end_time=eventupdate.end_date, start_time=eventupdate.start_date)
+
+  return render_template('events/update.html', form=form, current_time=datetime.now(), end_time=eventupdate.end_date, start_time=eventupdate.start_date, current_image=remove_prefix(eventupdate.image, "/static/image/"))
 
 
 @bp.route('/<id>/delete', methods = ['GET', 'POST'])

@@ -59,6 +59,30 @@ class EventForm(FlaskForm):
                                         choices=[('Upcoming', 'Upcoming'), ('Inactive', 'Inactive'), ('Booked', 'Booked'), ('Cancelled', 'Cancelled')])
     submit=SubmitField("Submit")
 
+# this is the update event form
+class UpdateEventForm(FlaskForm):
+    image = FileField('Image Header', validators=[FileAllowed(ALLOWED_FILE, message='Only support png, jpg, JPG, PNG, bmp')])
+    title = StringField('Title', validators=[InputRequired()])
+    host = HiddenField('')
+    venue = StringField('Venue', validators=[InputRequired()])
+    category = SelectField('Category', validators=[InputRequired()],
+                                        choices=[('N/A', '-'), ('Jazz', 'Jazz'), ('Country', 'Country'), ('Classical', 'Classical'), ('Hip-Hop', 'Hip-Hop'), ('Electronic', 'Electronic')])
+    start_date = DateTimeLocalField('Start Time', validators=[InputRequired()], format='%Y-%m-%dT%H:%M')
+    end_date = DateTimeLocalField('End Time', validators=[InputRequired()], format='%Y-%m-%dT%H:%M')
+    timezone = SelectField('Timezone', validators=[InputRequired()],
+                                        choices=[('N/A', '-'), 
+                                            ('(UTC+8:00)', '(UTC+8:00) Perth'), 
+                                            ('(UTC+9:30)', '(UTC+9:30) Adelaide, Darwin'), 
+                                            ('(UTC+9:30)', '(UTC+10:00) Brisbane'),
+                                            ('(UTC+10:00)', '(UTC+10:00) Hobart, Canberra, Melbourne, Sydney')])
+    description = TextAreaField('Description', validators=[InputRequired()])
+    featured_headline = TextAreaField('Featured Headline', validators=[InputRequired()])
+    price = DecimalField('Price (AUD)', validators=[InputRequired(), NumberRange(min=0, message="Please enter a valid price")])
+    quantity = IntegerField('Quantity (AUD)', validators=[InputRequired(), NumberRange(min=0, message="Please enter a valid quantity")])
+    status = RadioField('Event Status', validators=[InputRequired()],
+                                        choices=[('Upcoming', 'Upcoming'), ('Inactive', 'Inactive'), ('Booked', 'Booked'), ('Cancelled', 'Cancelled')])
+    submit=SubmitField("Submit")
+
 class CommentForm(FlaskForm):
     text = TextAreaField('Comment', validators=[InputRequired()])  
     submit=SubmitField('Submit')
