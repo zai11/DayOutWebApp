@@ -1,5 +1,9 @@
 
   
+html body {
+  background-color: #f6f7f8;
+}
+
   .jumbotron {
     background: url('../image/background.jpg') center / cover no-repeat;
     background-size: cover;
@@ -183,3 +187,8 @@ nav-link {
   border-color: #e1574a;
   color: #ffffff;
 }
+
+.eventdetails {
+  margin-bottom: 20px;
+  border: none;
+} 

@@ -32,21 +32,51 @@
     </div>
     <div class="col-md-3 float-right">
 
+      <div class="card eventdetails">
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-xs-5 h6">Event status</dt>
+            <dd class="col-xs-7"><span class="badge 
+              {% if event.status == "Upcoming" %}
+                bg-success
+                {% elif event.status == "Inactive" %}
+                bg-warning
+                {% elif event.status == "Booked" %}
+                bg-info
+                {% elif event.status == "Cancelled" %}
+                bg-danger
+                {% endif %}
+              bg-primary"> {{event.status}}</span></dd>
+          
+            <dt class="col-xs-5 h6">Start time</dt>
+            <dd class="col-xs-7">{{event.start_date.strftime("%d %B %Y, %I:%M%p")}}</dd>
+          
+            <dt class="col-xs-5 h6">End time</dt>
+            <dd class="col-xs-7">{{event.end_date.strftime("%d %B %Y, %I:%M%p")}}</dd>
+
+            <dt class="col-xs-5 h6">Timezone</dt>
+            <dd class="col-xs-7">{{event.timezone}}</dd>
+
+            <dt class="col-xs-5 h6">Venue</dt>
+            <dd class="col-xs-7">{{event.location}}</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="card eventdetails">
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-xs-5 h6">Price</dt>
+            <dd class="col-xs-7">${{event.price}}</dd>
+          
+            <dt class="col-xs-5 h6">Tickets Available</dt>
+            <dd class="col-xs-7">{{event.ticket_capacity-event.tickets_booked}}</dd>
+          </dl>
+        </div>
+      </div>
+      
       <div class="d-grid gap-2">
-        <button class="btn class='btn
-            {% if event.status == "Upcoming" %}
-            btn-outline-success
-            {% elif event.status == "Inactive" %}
-            btn-outline-warning
-            {% elif event.status == "Booked" %}
-            btn-outline-info
-            {% elif event.status == "Cancelled" %}
-            btn-outline-danger
-            {% endif %}
-            btn-lg" type="button" disabled>{{event.status}}</button>
-        <button class="btn btn-outline-dark btn-lg" type="button" disabled>Start: {{event.start_date.strftime("%d %B %Y, %I:%M%p")}}<br>End: {{event.end_date.strftime("%d %B %Y, %I:%M%p")}}</button>
-        <button class="btn btn-outline-dark btn-lg" type="button" disabled>${{event.price}}</button>
-        <button class="btn btn-outline-dark btn-lg" type="button" disabled>Tickets Remaining: <br> {{event.ticket_capacity-event.tickets_booked}}</button>
+        
         <!-- Button trigger modal -->
 
         {% if event.ticket_capacity-event.tickets_booked > 0 %}
@@ -55,7 +85,7 @@
             If an admin is logged in, the button is disabled.
             If the user is not logged in, the button is disabled and says "Login to Book"
           -->
-          <button type="button" class="btn btn-primary btn-lg" 
+          <button type="button" class="btn btn-primary btn-lg eventdetails" 
           {% if current_user.is_authenticated and not current_user.is_admin %} 
             data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book event
           {% elif not current_user.is_authenticated%}
@@ -65,21 +95,30 @@
           {% endif %}
         {% endif %}
         </button>
-
+        
 
         {% if current_user.is_authenticated and current_user.is_admin %} 
-        <a href="{{url_for('event.update', id=event.id)}}" class="btn btn-dark btn-sm" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14"
-            height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-            <path
-              d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-          </svg> Edit event</a>
 
-
-          <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-            </svg> Delete event
-          </button>
+        <div class="row h-50">
+          <div class="col-sm-6">
+            <div class="card">
+              <a href="{{url_for('event.update', id=event.id)}}" class="btn btn-dark btn-sm" type="button"><div><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path
+                  d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+              </svg></div> Update event</a>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                </svg></div> Delete event
+              </button>
+            </div>
+          </div>
+        </div>
 
           <!-- Are you sure you want to delete? -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,6 +129,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div class="text-center"><img class="mb-2" src="{{ url_for('static',filename='image/warning.png') }}" alt="" width="100" height="100"></div>
         Are you sure you want to delete your event <strong>{{event.title}}</strong>?
       </div>
       <div class="modal-footer">
