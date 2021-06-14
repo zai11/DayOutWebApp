@@ -22,6 +22,23 @@
 {% block content %}
 
 
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible d-flex align-items-center" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+      viewBox="0 0 16 16">
+      <path
+        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+    </svg>
+    <div class="flash-message">{{message}}</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</div>
 
 <div class="container">
   <div class="row description">
@@ -37,20 +54,20 @@
           <dl class="row">
             <dt class="col-xs-5 h6">Event status</dt>
             <dd class="col-xs-7"><span class="badge 
-              {% if event.status == "Upcoming" %}
+              {% if event.status == 'Upcoming' %}
                 bg-success
-                {% elif event.status == "Inactive" %}
+                {% elif event.status == 'Inactive' %}
                 bg-warning
-                {% elif event.status == "Booked" %}
+                {% elif event.status == 'Booked' %}
                 bg-info
-                {% elif event.status == "Cancelled" %}
+                {% elif event.status == 'Cancelled' %}
                 bg-danger
                 {% endif %}
               bg-primary"> {{event.status}}</span></dd>
-          
+
             <dt class="col-xs-5 h6">Start time</dt>
             <dd class="col-xs-7">{{event.start_date.strftime("%d %B %Y, %I:%M%p")}}</dd>
-          
+
             <dt class="col-xs-5 h6">End time</dt>
             <dd class="col-xs-7">{{event.end_date.strftime("%d %B %Y, %I:%M%p")}}</dd>
 
@@ -68,79 +85,86 @@
           <dl class="row">
             <dt class="col-xs-5 h6">Price</dt>
             <dd class="col-xs-7">${{event.price}}</dd>
-          
+
             <dt class="col-xs-5 h6">Tickets Available</dt>
             <dd class="col-xs-7">{{event.ticket_capacity-event.tickets_booked}}</dd>
           </dl>
         </div>
       </div>
-      
+
       <div class="d-grid gap-2">
-        
+
         <!-- Button trigger modal -->
 
         {% if event.ticket_capacity-event.tickets_booked > 0 %}
-          <!-- 
+        <!-- 
             If a user is logged in, the button acts as a model for booking
             If an admin is logged in, the button is disabled.
             If the user is not logged in, the button is disabled and says "Login to Book"
           -->
-          <button type="button" class="btn btn-primary btn-lg eventdetails" 
-          {% if current_user.is_authenticated and not current_user.is_admin %} 
-            data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book event
+        <button type="button" class="btn btn-primary btn-lg eventdetails" {% if current_user.is_authenticated and not
+          current_user.is_admin %} data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book event
           {% elif not current_user.is_authenticated%}
-            disabled>Login to Book
+          disabled>Login to Book
           {% else %}
-            disabled>Book event
+          disabled>Book event
           {% endif %}
-        {% endif %}
+          {% endif %}
         </button>
-        
 
-        {% if current_user.is_authenticated and current_user.is_admin %} 
+
+        {% if current_user.is_authenticated and current_user.is_admin %}
 
         <div class="row h-50">
           <div class="col-sm-6">
             <div class="card">
-              <a href="{{url_for('event.update', id=event.id)}}" class="btn btn-dark btn-sm" type="button"><div><svg xmlns="http://www.w3.org/2000/svg" width="14"
-                height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                <path
-                  d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-              </svg></div> Update event</a>
+              <a href="{{url_for('event.update', id=event.id)}}" class="btn btn-dark btn-sm" type="button">
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                    class="bi bi-pencil" viewBox="0 0 16 16">
+                    <path
+                      d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                  </svg></div> Update event
+              </a>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="card">
               <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                </svg></div> Delete event
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                  </svg></div> Delete event
               </button>
             </div>
           </div>
         </div>
 
-          <!-- Are you sure you want to delete? -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">There is no going back</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="text-center"><img class="mb-2" src="{{ url_for('static',filename='image/warning.png') }}" alt="" width="100" height="100"></div>
-        Are you sure you want to delete your event <strong>{{event.title}}</strong>?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <a href="{{url_for('event.delete', id=event.id)}}" class="btn btn-danger" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-        </svg> I want to permanatly delete</a>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- Are you sure you want to delete? -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">There is no going back</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="text-center"><img class="mb-2" src="{{ url_for('static',filename='image/warning.png') }}"
+                    alt="" width="100" height="100"></div>
+                Are you sure you want to delete your event <strong>{{event.title}}</strong>?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{url_for('event.delete', id=event.id)}}" class="btn btn-danger" type="button"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                  </svg> I want to permanatly delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
@@ -157,16 +181,16 @@
 
         //this checks what button was last pressed to know whether or not to show the booking modal on refresh. It's stored in session storage.
         //-------------------------------------------------------------------------------------------------------
-        function lastButtonComment(){
-          if (typeof(Storage) !== "undefined") {
+        function lastButtonComment() {
+          if (typeof (Storage) !== "undefined") {
             // Store
             sessionStorage.setItem("last_button", "comment");
           } else {
             alert("Sorry, your browser does not support web storage. Please switch browsers.");
           }
         }
-        function lastButtonBooking(){
-          if (typeof(Storage) !== "undefined") {
+        function lastButtonBooking() {
+          if (typeof (Storage) !== "undefined") {
             // Store
             sessionStorage.setItem("last_button", "booking");
           } else {
@@ -178,11 +202,17 @@
 
 
         //on page load
-        $(document).ready(function() {
+        $(document).ready(function () {
           // If the flash message for too many tickets is shown
           if (sessionStorage.getItem("last_button") == "booking" && "{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}" != "") {
-          formErrors = true
+            formErrors = true
           } 
+
+          // need to make this if booking was successful
+          // else if (sessionStorage.getItem("last_button") == "booking" && "{% with errors = get_flashed_messages() %}{% if errors %}{%- for msg in errors %}{{ msg }}{% endfor -%}{% endif %}{% endwith %}" != "") {
+          //   formErrors = false
+          // } 
+
           // If the integer validator message is shown
           else if (sessionStorage.getItem("last_button") == "booking" && "{% for field, errors in booking_form.errors.items() %}{{ ''.join(errors) }}{% endfor %}" != "") {
             formErrors = true;
@@ -191,6 +221,7 @@
           if (formErrors) {
             $("#staticBackdrop").modal('show');
           }
+          
         });
       </script>
 
@@ -202,7 +233,7 @@
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div>rerrere</div>
 
-          
+
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -212,108 +243,116 @@
               <div class="modal-body">
                 <div class="row header">
 
-                
 
-                <div class="col-10">
-                  {{ wtf.form_field(booking_form.tickets_booked, class='form-control', placeholder='Quantity') }}
-                </div>
 
-                <div class="col-2">
-                  {{ wtf.form_field(booking_form.event, class='', value = event.id) }}
-                  {{ wtf.form_field(booking_form.user, class='', value = current_user.name) }}
+                  <div class="col-10">
+                    {{ wtf.form_field(booking_form.tickets_booked, class='form-control', placeholder='Quantity') }}
+                  </div>
+
+                  <div class="col-2">
+                    {{ wtf.form_field(booking_form.event, class='', value = event.id) }}
+                    {{ wtf.form_field(booking_form.user, class='', value = current_user.name) }}
+                  </div>
                 </div>
-              </div>
                 <div class="row">
                   {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                      <ul class='flashes'>
-                      {% for message in messages %}
-                        {{ message }}
-                      {% endfor %}
-                      </ul>
-                    {% endif %}
+                  {% if messages %}
+                  <ul class='flashes'>
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
                   {% endwith %}
-              </div>
-                
-                
+                </div>
+
+
 
                 <div class="col-sm-6">
-                  {{ wtf.form_field(booking_form.submit, onclick="lastButtonBooking()", id='booking_form_submit', class='btn btn-primary btn-large text-center', disabled=false) }}
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Second modal dialog -->
-        <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Order completed</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <img src="/static/image/checked.png" class="mx-auto d-block" alt="Tick Box" width="100" height="100">
-                <p class="lead">Thank you for your purchase. Your tickets will be sent to your nominated email. Have a
-                  great Dayout!</p>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  {{ wtf.form_field(booking_form.submit, onclick="lastButtonBooking()", id='booking_form_submit',
+                  class='btn btn-primary btn-large text-center', disabled=false) }}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {% endif %}
-      </form>
     </div>
-    <p class="lead text-left">Reviews</p>
-
-    <div class="col-md-9">
-      {% for i in range(comments|length) %}
-      <div class="card mb-3" style="max-width: 100%;">
-        <div class="row g-0 d-flex flex-wrap align-items-center">
-          <div class="col-md-10">
-            <div class="card-body">
-              <h5 class="card-title"><!--Neil Woodwards--> {{comments[i][1].name}}</h5>
-              <p class="card-text">{{comments[i][0].text}}</p>
-              <p class="card-text"><small class="text-muted">Posted on: {{comments[i][0].created_at.strftime("%d %b %Y %I:%M %p")}}</small></p>
+    <!-- Second modal dialog -->
+    <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Order completed</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="/static/image/checked.png" class="mx-auto d-block" alt="Tick Box" width="100" height="100">
+            <p class="lead">Thank you for your purchase. Your tickets will be sent to your nominated email. Have a
+              great Dayout!</p>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
-      {% endfor %}
     </div>
-
-    
-
-    <style>
-      div .control-label{display: none;}
-    </style>
-    <div class="col-md-9">
-      {% if current_user.is_authenticated and not current_user.is_admin%} 
-      <p class="lead text-left">Leave a comment</p>
-      <form id="comment_form" action="" method="POST" class="form" enctype="multipart/form-data">
-        {{ comment_form.csrf_token() }}
-        {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment')}}
-        {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn btn-primary btn-large text-center')}}
-      </form>
-      {% elif current_user.is_authenticated and current_user.is_admin %}
-      <p class="lead text-left">Leave a comment</p>
-      <form id="comment_form" action="" method="POST" class="form" enctype="multipart/form-data">
-        {{ comment_form.csrf_token() }}
-        {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment', disabled=true)}}
-        {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn btn-primary btn-large text-center', disabled=true)}}
-      </form>
-      {% else %}
-        <p class="lead text-left">Login as a user to comment</p>
-        <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-sm">Login</a>
-        <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
-
-      {% endif %}
-    </div>
-    <div class="col-md-3"></div>
+    {% endif %}
+    </form>
   </div>
+  <p class="lead text-left">Reviews</p>
+
+  <div class="col-md-9">
+    {% for i in range(comments|length) %}
+    <div class="card mb-3" style="max-width: 100%;">
+      <div class="row g-0 d-flex flex-wrap align-items-center">
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">
+              <!--Neil Woodwards--> {{comments[i][1].name}}
+            </h5>
+            <p class="card-text">{{comments[i][0].text}}</p>
+            <p class="card-text"><small class="text-muted">Posted on: {{comments[i][0].created_at.strftime("%d %b %Y
+                %I:%M %p")}}</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+  <style>
+    div .control-label {
+      display: none;
+    }
+  </style>
+  <div class="col-md-9">
+    {% if current_user.is_authenticated and not current_user.is_admin%}
+    <p class="lead text-left">Leave a comment</p>
+    <form id="comment_form" action="" method="POST" class="form" enctype="multipart/form-data">
+      {{ comment_form.csrf_token() }}
+      {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment')}}
+      {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn
+      btn-primary btn-large text-center')}}
+    </form>
+    {% elif current_user.is_authenticated and current_user.is_admin %}
+    <p class="lead text-left">Leave a comment</p>
+    <form id="comment_form" action="" method="POST" class="form" enctype="multipart/form-data">
+      {{ comment_form.csrf_token() }}
+      {{ wtf.form_field(comment_form.text, class='form-control', placeholder='Enter a comment', disabled=true)}}
+      {{ wtf.form_field(comment_form.submit, onclick="lastButtonComment()", id='comment_form_submit', class='btn
+      btn-primary btn-large text-center', disabled=true)}}
+    </form>
+    {% else %}
+    <p class="lead text-left">Login as a user to comment</p>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-sm">Login</a>
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
+
+    {% endif %}
+  </div>
+  <div class="col-md-3"></div>
+</div>
 
 </div>
 

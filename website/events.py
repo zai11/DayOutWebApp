@@ -53,6 +53,7 @@ def show(id):
       #print("error to many tickets booked")
       flash("Please reduce the number of tickets you would like to purchase")
     else:
+      flash('Your booking has been submitted!', 'success')
       db.session.execute("UPDATE events SET tickets_booked = tickets_booked + " + str(booking.tickets_booked) + " WHERE id = " + booking.event_id)
       db.session.add(booking)
       db.session.commit()
