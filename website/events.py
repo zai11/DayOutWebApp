@@ -98,7 +98,7 @@ def create():
     db.session.add(event)
     # commit to the database
     db.session.commit()
-    flash("You have successfully created an event")
+    flash('You have successfully created an event', 'success')
     return redirect(url_for('main.index'))
   return render_template('events/create.html', form=form, current_time=datetime.now())
 
@@ -151,9 +151,9 @@ def delete(id):
   try:
     db.session.delete(eventdelete)
     db.session.commit()
-    flash('You have successfully deleted your event', 'success')
+    flash('Your event is now deleted', 'warning')
     return redirect(url_for('main.index'))
   except:
-    flash('Something didnt work', 'success')
+    flash('Something didnt work', 'danger')
     return redirect(url_for('main.index'))
   

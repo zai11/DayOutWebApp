@@ -26,6 +26,7 @@ def login(): #view function
             login_user(u1)
             nextp = request.args.get('nextp') #this gives the url from where the login page was accessed
             if nextp is None or not nextp.startswith('/'):
+                flash('You have successfully logged in', 'success')
                 return redirect(url_for('main.index'))
             return redirect(nextp)
         else:
@@ -71,5 +72,6 @@ def logout():
     nextp = request.args.get('nextp') #this gives the url from where the login page was accessed
     print(nextp)
     if nextp is None or not nextp.startswith('/'):
+        flash('You are now logged out', 'warning')
         return redirect(url_for('main.index'))
     return redirect(nextp)
