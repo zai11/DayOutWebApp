@@ -71,12 +71,21 @@
         </form>
         {% endif %}
         <!-- When you have login form, then do show the user a link to register -->
-        {% if heading|lower =='login' %}
-
-        <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
-        {% endif %}
+        
     </div>
     <div class="col-sm-4">
+
+      {% if heading|lower =='login' %}
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">New around here?</div>
+        <div class="card-body">
+          <p class="card-text">Register as an admin and start hosting events.</p>
+          <a class="btn btn-primary" href="{{ url_for('auth.register') }}" role="button">Register here</a>
+        </div>
+        
+
+      </div>
+      {% endif %}
     </div>
     <div class="col-sm-4">
     </div>
